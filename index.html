@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
@@ -7,611 +6,477 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="投资追踪">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#1a1a2e" id="theme-color-meta">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1a2e'/%3E%3Ctext y='.9em' font-size='72' x='50' text-anchor='middle' dominant-baseline='hanging'%3E📈%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#141428" id="tcmeta">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141428'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334d399' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%2334d399' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolyline points='12,72 28,58 44,62 58,38 72,30 88,18' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='12,72 28,58 44,62 58,38 72,30 88,18 88,85 12,85' fill='url(%23g)'/%3E%3Ccircle cx='88' cy='18' r='5' fill='%2334d399'/%3E%3C/svg%3E">
 <link rel="manifest" id="pwa-manifest">
-
-<title>投资追踪器 / Investment Tracker</title>
+<title>投资追踪器</title>
 <style>
-/* ── CSS Variables for light/dark ── */
-:root {
-  --bg: #0f0f13;
-  --bg2: #1a1a2e;
-  --bg3: #0f0f13;
-  --border: #2d2d44;
-  --border2: #1e1e2e;
-  --text: #e2e8f0;
-  --text2: #94a3b8;
-  --text3: #64748b;
-  --hover: #ffffff08;
-  --card-bg: #1a1a2e;
-  --input-bg: #0f0f13;
-  --section-bg: #1a1a2e;
-  --tx-bg: #0f0f13;
-  --price-bg: #1a1a2e;
-  --toggle-bg: #0f0f13;
-  --header-bg: linear-gradient(135deg,#1a1a2e,#16213e);
-  --shadow: 0 2px 12px rgba(0,0,0,0.4);
+:root{
+  --bg:#0f0f13;--bg2:#1a1a2e;--bg3:#0f0f13;--border:#2d2d44;--border2:#1e1e2e;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--hover:#ffffff08;
+  --card:#1a1a2e;--inp:#0f0f13;--sec:#1a1a2e;--txbg:#0f0f13;--pbg:#1a1a2e;
+  --tbg:#0f0f13;--shd:0 2px 12px rgba(0,0,0,.4);
+  --hbg:linear-gradient(135deg,#1a1a2e,#16213e);
 }
-body.light {
-  --bg: #f1f5f9;
-  --bg2: #ffffff;
-  --bg3: #f8fafc;
-  --border: #e2e8f0;
-  --border2: #e9edf2;
-  --text: #1e293b;
-  --text2: #475569;
-  --text3: #94a3b8;
-  --hover: #00000006;
-  --card-bg: #ffffff;
-  --input-bg: #f8fafc;
-  --section-bg: #ffffff;
-  --tx-bg: #f8fafc;
-  --price-bg: #f8fafc;
-  --toggle-bg: #f1f5f9;
-  --header-bg: linear-gradient(135deg,#7c3aed,#4f46e5);
-  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+body.light{
+  --bg:#f1f5f9;--bg2:#fff;--bg3:#f8fafc;--border:#e2e8f0;--border2:#e9edf2;
+  --text:#1e293b;--text2:#475569;--text3:#94a3b8;--hover:#00000006;
+  --card:#fff;--inp:#f8fafc;--sec:#fff;--txbg:#f8fafc;--pbg:#f8fafc;
+  --tbg:#f1f5f9;--shd:0 2px 12px rgba(0,0,0,.08);
+  --hbg:linear-gradient(135deg,#7c3aed,#4f46e5);
 }
-
-- { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  body { font-family:-apple-system,BlinkMacSystemFont,‘Segoe UI’,sans-serif; background:var(–bg); color:var(–text); min-height:100vh; transition:background 0.3s,color 0.3s; }
-
-/* ── Header ── */
-.header { background:var(–header-bg); padding:14px 20px; border-bottom:1px solid var(–border); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:var(–shadow); }
-.header-left h1 { font-size:1.2rem; font-weight:700; color:#a78bfa; }
-body.light .header-left h1 { color:#fff; }
-.header-left p { color:var(–text2); font-size:0.75rem; margin-top:2px; }
-body.light .header-left p { color:rgba(255,255,255,0.8); }
-.header-controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-
-/* ── Toggles ── */
-.toggle-group { display:flex; background:var(–toggle-bg); border:1px solid var(–border); border-radius:8px; overflow:hidden; }
-.tgl-btn { padding:6px 14px; border:none; cursor:pointer; font-size:0.78rem; font-weight:600; background:transparent; color:var(–text3); transition:all 0.2s; white-space:nowrap; }
-.tgl-btn.active { background:#a78bfa22; color:#a78bfa; }
-body.light .tgl-btn.active { background:rgba(255,255,255,0.25); color:#fff; }
-
-/* ── Layout ── */
-.container { max-width:1100px; margin:0 auto; padding:16px; }
-
-/* ── Summary ── */
-.summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:18px; }
-.card { background:var(–card-bg); border:1px solid var(–border); border-radius:12px; padding:16px 18px; transition:background 0.3s,border 0.3s; box-shadow:var(–shadow); }
-.card-label { font-size:0.68rem; color:var(–text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:5px; }
-.card-value { font-size:1.4rem; font-weight:700; line-height:1.2; }
-.card-sub { font-size:0.73rem; color:var(–text3); margin-top:4px; }
-.card-myr { font-size:0.8rem; font-weight:600; margin-top:3px; }
-
-/* MYR section */
-.myr-banner { background:var(–card-bg); border:1px solid var(–border); border-radius:12px; padding:16px 18px; margin-bottom:18px; box-shadow:var(–shadow); }
-.myr-banner-title { font-size:0.78rem; color:var(–text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.myr-rate-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
-.myr-rate-row label { font-size:0.8rem; color:var(–text2); white-space:nowrap; }
-.myr-rate-input { background:var(–input-bg); border:1px solid var(–border); border-radius:7px; padding:7px 11px; color:var(–text); font-size:0.88rem; outline:none; width:110px; transition:border-color 0.2s; }
-.myr-rate-input:focus { border-color:#a78bfa; }
-.myr-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
-.myr-card { background:var(–bg3); border:1px solid var(–border2); border-radius:10px; padding:13px 15px; }
-.myr-card-label { font-size:0.68rem; color:var(–text3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
-.myr-card-value { font-size:1.1rem; font-weight:700; }
-.myr-card-sub { font-size:0.72rem; color:var(–text3); margin-top:3px; }
-
-.green { color:#34d399; } .red { color:#f87171; } .purple { color:#a78bfa; } .blue { color:#60a5fa; } .amber { color:#fbbf24; } .teal { color:#2dd4bf; }
-
-/* ── Sections ── */
-.section { background:var(–section-bg); border:1px solid var(–border); border-radius:12px; padding:18px; margin-bottom:18px; box-shadow:var(–shadow); transition:background 0.3s; }
-.section-title { font-size:0.9rem; font-weight:600; color:#a78bfa; margin-bottom:14px; }
-.form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; }
-.form-group { display:flex; flex-direction:column; gap:4px; }
-.form-group label { font-size:0.73rem; color:var(–text2); }
-.form-group input,.form-group select { background:var(–input-bg); border:1px solid var(–border); border-radius:8px; padding:9px 11px; color:var(–text); font-size:0.88rem; outline:none; transition:border-color 0.2s; -webkit-appearance:none; width:100%; }
-.form-group input:focus,.form-group select:focus { border-color:#a78bfa; }
-.form-group select { background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘12’ viewBox=‘0 0 12 12’%3E%3Cpath fill=’%2394a3b8’ d=‘M6 8L1 3h10z’/%3E%3C/svg%3E”); background-repeat:no-repeat; background-position:right 10px center; padding-right:28px; }
-
-.btn { padding:9px 20px; border-radius:8px; border:none; cursor:pointer; font-size:0.85rem; font-weight:600; transition:all 0.2s; display:inline-flex; align-items:center; gap:6px; touch-action:manipulation; }
-.btn-primary { background:linear-gradient(135deg,#7c3aed,#4f46e5); color:white; }
-.btn-primary:active { opacity:0.85; transform:scale(0.98); }
-.btn-teal { background:linear-gradient(135deg,#0f766e,#0369a1); color:white; }
-.btn-teal:active { opacity:0.85; transform:scale(0.98); }
-.btn-danger { background:transparent; border:1px solid #f87171; color:#f87171; padding:5px 11px; font-size:0.76rem; border-radius:6px; }
-.btn-danger:active { background:#f871711a; }
-
-/* ── Table ── */
-.table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:8px; }
-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
-th { text-align:left; padding:8px 10px; color:var(–text3); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em; border-bottom:1px solid var(–border); white-space:nowrap; background:var(–section-bg); }
-td { padding:10px; border-bottom:1px solid var(–border2); white-space:nowrap; }
-tr:last-child td { border-bottom:none; }
-tr:hover td { background:var(–hover); }
-.ticker-badge { background:#a78bfa22; color:#a78bfa; padding:2px 8px; border-radius:20px; font-weight:600; font-size:0.78rem; display:inline-block; }
-
-/* ── Transaction list ── */
-.tx-list { display:flex; flex-direction:column; gap:8px; }
-.tx-item { display:flex; align-items:center; justify-content:space-between; background:var(–tx-bg); border:1px solid var(–border2); border-radius:10px; padding:11px 13px; gap:8px; }
-.tx-left { display:flex; align-items:center; gap:10px; min-width:0; flex:1; }
-.tx-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; flex-shrink:0; }
-.tx-icon.buy { background:#34d39922; } .tx-icon.sell { background:#f8717122; } .tx-icon.deposit { background:#fbbf2422; }
-.tx-info { font-size:0.81rem; min-width:0; }
-.tx-info .name { font-weight:600; }
-.tx-info .detail { color:var(–text3); font-size:0.73rem; margin-top:1px; }
-.tx-right { text-align:right; flex-shrink:0; }
-.tx-right .amount { font-weight:600; font-size:0.88rem; }
-.tx-right .date { color:var(–text3); font-size:0.7rem; margin-top:2px; }
-.tx-right .del { margin-top:5px; }
-
-/* ── Price grid ── */
-.price-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:9px; }
-.price-item { background:var(–price-bg); border:1px solid var(–border); border-radius:8px; padding:11px; display:flex; flex-direction:column; gap:6px; }
-.price-item .pticker { color:#a78bfa; font-weight:600; font-size:0.85rem; }
-.price-item input { background:var(–input-bg); border:1px solid var(–border); border-radius:6px; padding:7px 9px; color:var(–text); font-size:0.85rem; outline:none; width:100%; }
-.price-item input:focus { border-color:#a78bfa; }
-
-/* ── Tabs ── */
-.tab-row { display:flex; gap:3px; margin-bottom:14px; flex-wrap:wrap; }
-.tab { padding:7px 14px; border-radius:7px; border:none; cursor:pointer; font-size:0.8rem; font-weight:500; background:transparent; color:var(–text3); transition:all 0.2s; touch-action:manipulation; }
-.tab.active { background:#a78bfa22; color:#a78bfa; }
-.tab:hover:not(.active) { background:var(–hover); color:var(–text2); }
-
-.empty-state { text-align:center; padding:32px; color:var(–text3); }
-.empty-state .icon { font-size:2rem; margin-bottom:8px; }
-
-/* ── Mobile ── */
-@media (max-width: 640px) {
-.header { padding:12px 14px; }
-.header-left h1 { font-size:1.05rem; }
-.container { padding:10px; }
-.summary-grid { grid-template-columns:1fr 1fr; gap:9px; }
-.myr-grid { grid-template-columns:1fr 1fr; }
-.card { padding:13px 14px; }
-.card-value { font-size:1.1rem; }
-.section { padding:14px; margin-bottom:13px; }
-.form-grid { grid-template-columns:1fr 1fr; gap:9px; }
-.btn { padding:10px 16px; font-size:0.83rem; width:100%; justify-content:center; }
-.tab { padding:8px 12px; font-size:0.78rem; flex:1; text-align:center; min-width:0; }
-.tab-row { display:grid; grid-template-columns:1fr 1fr 1fr; }
-.tx-item { align-items:flex-start; }
-.price-grid { grid-template-columns:1fr 1fr; }
-table { font-size:0.76rem; }
-th, td { padding:8px; }
-.myr-banner { padding:14px; }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .25s,color .25s}
+/* Header */
+.hdr{background:var(--hbg);padding:14px 20px;padding-top:max(14px,env(safe-area-inset-top));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:var(--shd)}
+.hdr h1{font-size:1.2rem;font-weight:700;color:#a78bfa}
+body.light .hdr h1{color:#fff}
+.hdr p{color:var(--text2);font-size:.75rem;margin-top:2px}
+body.light .hdr p{color:rgba(255,255,255,.8)}
+.hctl{display:flex;gap:8px;align-items:center}
+.tgrp{display:flex;background:var(--tbg);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.tbtn{padding:6px 14px;border:none;cursor:pointer;font-size:.78rem;font-weight:600;background:transparent;color:var(--text3);transition:all .2s;white-space:nowrap}
+.tbtn.on{background:#a78bfa22;color:#a78bfa}
+body.light .tbtn.on{background:rgba(255,255,255,.25);color:#fff}
+/* Layout */
+.wrap{max-width:1100px;margin:0 auto;padding:16px;padding-bottom:max(20px,env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+/* Summary */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:var(--shd)}
+.cl{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.cv{font-size:1.4rem;font-weight:700;line-height:1.2}
+.cs{font-size:.73rem;color:var(--text3);margin-top:4px}
+/* MYR */
+.mbox{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:18px;box-shadow:var(--shd)}
+.mtitle{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.mrate{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.mrate label{font-size:.8rem;color:var(--text2);white-space:nowrap}
+.mrate input{background:var(--inp);border:1px solid var(--border);border-radius:7px;padding:7px 11px;color:var(--text);font-size:.88rem;outline:none;width:110px}
+.mrate input:focus{border-color:#a78bfa}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.mc{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:13px 15px}
+.mcl{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.mcv{font-size:1.1rem;font-weight:700}
+.mcs{font-size:.72rem;color:var(--text3);margin-top:3px}
+/* Colors */
+.green{color:#34d399}.red{color:#f87171}.purple{color:#a78bfa}.blue{color:#60a5fa}.amber{color:#fbbf24}.teal{color:#2dd4bf}
+/* Section */
+.sec{background:var(--sec);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:var(--shd)}
+.stitle{font-size:.9rem;font-weight:600;color:#a78bfa;margin-bottom:14px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.fi{display:flex;flex-direction:column;gap:4px}
+.fi label{font-size:.73rem;color:var(--text2)}
+.fi input,.fi select{background:var(--inp);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;width:100%;-webkit-appearance:none}
+.fi input:focus,.fi select:focus{border-color:#a78bfa}
+.fi select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:6px;touch-action:manipulation}
+.bp{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff}
+.bt{background:linear-gradient(135deg,#0f766e,#0369a1);color:#fff}
+.bd{background:transparent;border:1px solid #f87171;color:#f87171;padding:5px 11px;font-size:.76rem;border-radius:6px}
+/* Table */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{text-align:left;padding:8px 10px;color:var(--text3);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap;background:var(--sec)}
+td{padding:10px;border-bottom:1px solid var(--border2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--hover)}
+.badge{background:#a78bfa22;color:#a78bfa;padding:2px 8px;border-radius:20px;font-weight:600;font-size:.78rem;display:inline-block}
+/* Tx list */
+.txlist{display:flex;flex-direction:column;gap:8px}
+.txi{display:flex;align-items:center;justify-content:space-between;background:var(--txbg);border:1px solid var(--border2);border-radius:10px;padding:11px 13px;gap:8px}
+.txl{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.txic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.txic.buy{background:#34d39922}.txic.sell{background:#f8717122}.txic.dep{background:#fbbf2422}
+.txin{font-size:.81rem}
+.txin .nm{font-weight:600}
+.txin .dt{color:var(--text3);font-size:.73rem;margin-top:1px}
+.txr{text-align:right;flex-shrink:0}
+.txr .am{font-weight:600;font-size:.88rem}
+.txr .da{color:var(--text3);font-size:.7rem;margin-top:2px}
+.txr .dl{margin-top:5px}
+/* Price grid */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px}
+.pi{background:var(--pbg);border:1px solid var(--border);border-radius:8px;padding:11px;display:flex;flex-direction:column;gap:6px}
+.pi .ptk{color:#a78bfa;font-weight:600;font-size:.85rem}
+.pi input{background:var(--inp);border:1px solid var(--border);border-radius:6px;padding:7px 9px;color:var(--text);font-size:.85rem;outline:none;width:100%}
+.pi input:focus{border-color:#a78bfa}
+/* Tabs */
+.tabrow{display:flex;gap:3px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:500;background:transparent;color:var(--text3);transition:all .2s;touch-action:manipulation}
+.tab.on{background:#a78bfa22;color:#a78bfa}
+.tab:hover:not(.on){background:var(--hover);color:var(--text2)}
+.empty{text-align:center;padding:32px;color:var(--text3)}
+.empty .ic{font-size:2rem;margin-bottom:8px}
+/* Mobile */
+@media(max-width:640px){
+  .hdr{padding:12px 14px;padding-top:max(12px,env(safe-area-inset-top))}
+  .hdr h1{font-size:1.05rem}
+  .wrap{padding:10px;padding-bottom:max(80px,env(safe-area-inset-bottom))}
+  .sg{grid-template-columns:1fr 1fr;gap:9px}
+  .mg{grid-template-columns:1fr 1fr}
+  .card{padding:13px 14px}
+  .cv{font-size:1.1rem}
+  .sec{padding:14px;margin-bottom:13px}
+  .fg{grid-template-columns:1fr 1fr;gap:9px}
+  .btn{padding:10px 16px;font-size:.83rem;width:100%;justify-content:center}
+  .tabrow{display:grid;grid-template-columns:1fr 1fr 1fr}
+  .tab{text-align:center}
+  .pgrid{grid-template-columns:1fr 1fr}
+  table{font-size:.76rem}
+  th,td{padding:8px}
 }
-@media (max-width: 380px) {
-.summary-grid { grid-template-columns:1fr 1fr; }
-.header-controls { gap:5px; }
-.tgl-btn { padding:5px 10px; font-size:0.72rem; }
-}
-
-/* iOS safe area */
-.header { padding-top: max(14px, env(safe-area-inset-top)); padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
-.container { padding-bottom: max(16px, env(safe-area-inset-bottom)); padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
-@media (max-width: 640px) {
-.header { padding-top: max(12px, env(safe-area-inset-top)); padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
-.container { padding-bottom: max(80px, env(safe-area-inset-bottom)); padding-left: max(10px, env(safe-area-inset-left)); padding-right: max(10px, env(safe-area-inset-right)); }
-}
-
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-left">
-    <h1>📈 <span id="h-title">投资追踪器</span></h1>
-    <p id="h-sub">Moomoo · USD/MYR</p>
+<div class="hdr">
+  <div>
+    <h1>📈 <span id="ht">投资追踪器</span></h1>
+    <p>Moomoo · USD / MYR</p>
   </div>
-  <div class="header-controls">
-    <div class="toggle-group">
-      <button class="tgl-btn active" onclick="setLang('zh',this)">中文</button>
-      <button class="tgl-btn" onclick="setLang('en',this)">EN</button>
+  <div class="hctl">
+    <div class="tgrp" id="ltg">
+      <button class="tbtn on" onclick="setLang('zh',this)">中文</button>
+      <button class="tbtn" onclick="setLang('en',this)">EN</button>
     </div>
-    <div class="toggle-group">
-      <button class="tgl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    <div class="tgrp">
+      <button class="tbtn on" id="thbtn" onclick="toggleTheme()">☀️</button>
     </div>
   </div>
 </div>
 
-<div class="container">
+<div class="wrap">
 
   <!-- USD Summary -->
-
-  <div class="summary-grid">
-    <div class="card"><div class="card-label" id="lbl-deposit">总存款</div><div class="card-value amber" id="sumDeposit">$0.00</div><div class="card-sub" id="sub-deposit">USD · Cash In</div></div>
-    <div class="card"><div class="card-label" id="lbl-invested">已投本金</div><div class="card-value purple" id="sumPrincipal">$0.00</div><div class="card-sub" id="sub-invested">买股 + 手续费</div></div>
-    <div class="card"><div class="card-label" id="lbl-cash">剩余现金</div><div class="card-value blue" id="sumCash">$0.00</div><div class="card-sub" id="sub-cash">存款 - 已投</div></div>
-    <div class="card"><div class="card-label" id="lbl-value">当前市值</div><div class="card-value blue" id="sumValue">$0.00</div><div class="card-sub" id="sub-value">USD</div></div>
-    <div class="card"><div class="card-label" id="lbl-pnl">总盈亏</div><div class="card-value" id="sumPnl">$0.00</div><div class="card-sub" id="sumPnlPct">0.00%</div></div>
-    <div class="card"><div class="card-label" id="lbl-fees">手续费</div><div class="card-value red" id="sumFees">$0.00</div><div class="card-sub" id="sub-fees">USD</div></div>
+  <div class="sg">
+    <div class="card"><div class="cl" id="l1">总存款</div><div class="cv amber" id="sD">$0.00</div><div class="cs">USD · Cash In</div></div>
+    <div class="card"><div class="cl" id="l2">已投本金</div><div class="cv purple" id="sP">$0.00</div><div class="cs" id="l2s">买股+手续费</div></div>
+    <div class="card"><div class="cl" id="l3">剩余现金</div><div class="cv blue" id="sC">$0.00</div><div class="cs" id="l3s">存款-已投</div></div>
+    <div class="card"><div class="cl" id="l4">当前市值</div><div class="cv blue" id="sV">$0.00</div><div class="cs">USD</div></div>
+    <div class="card"><div class="cl" id="l5">总盈亏</div><div class="cv" id="sPnl">$0.00</div><div class="cs" id="sPct">0.00%</div></div>
+    <div class="card"><div class="cl" id="l6">手续费</div><div class="cv red" id="sF">$0.00</div><div class="cs">USD</div></div>
   </div>
 
-  <!-- MYR Impact -->
-
-  <div class="myr-banner">
-    <div class="myr-banner-title">🇲🇾 <span id="myr-title">马币影响 (MYR Impact)</span></div>
-    <div class="myr-rate-row">
-      <label id="myr-rate-lbl">USD/MYR 汇率：</label>
-      <input class="myr-rate-input" id="myrRate" type="number" value="4.7" step="0.01" min="0" oninput="saveMyr();render()">
-      <span style="font-size:0.78rem;color:var(--text3)" id="myr-rate-hint">手动输入今日汇率</span>
+  <!-- MYR -->
+  <div class="mbox">
+    <div class="mtitle">🇲🇾 <span id="mt">马币影响 (MYR Impact)</span></div>
+    <div class="mrate">
+      <label id="mrl">USD/MYR 汇率：</label>
+      <input id="myrRate" type="number" value="4.7" step="0.01" min="0" inputmode="decimal" oninput="saveMyr();render()">
+      <span style="font-size:.75rem;color:var(--text3)" id="mrh">手动输入今日汇率</span>
     </div>
-    <div class="myr-grid">
-      <div class="myr-card"><div class="myr-card-label" id="myr-dep-lbl">存款 (MYR)</div><div class="myr-card-value amber" id="myrDeposit">RM 0.00</div><div class="myr-card-sub" id="myr-dep-sub">总共出了多少马币</div></div>
-      <div class="myr-card"><div class="myr-card-label" id="myr-val-lbl">市值 (MYR)</div><div class="myr-card-value blue" id="myrValue">RM 0.00</div><div class="myr-card-sub" id="myr-val-sub">现在值多少马币</div></div>
-      <div class="myr-card"><div class="myr-card-label" id="myr-pnl-lbl">净盈亏 (MYR)</div><div class="myr-card-value" id="myrPnl">RM 0.00</div><div class="myr-card-sub" id="myrPnlSub">0.00%</div></div>
-      <div class="myr-card"><div class="myr-card-label" id="myr-cash-lbl">剩余现金 (MYR)</div><div class="myr-card-value teal" id="myrCash">RM 0.00</div><div class="myr-card-sub" id="myr-cash-sub">未投入余额</div></div>
+    <div class="mg">
+      <div class="mc"><div class="mcl" id="md1">存款 (MYR)</div><div class="mcv amber" id="mD">RM 0.00</div><div class="mcs" id="md1s">总共出了多少马币</div></div>
+      <div class="mc"><div class="mcl" id="md2">市值 (MYR)</div><div class="mcv blue" id="mV">RM 0.00</div><div class="mcs" id="md2s">现在值多少马币</div></div>
+      <div class="mc"><div class="mcl" id="md3">净盈亏 (MYR)</div><div class="mcv" id="mPnl">RM 0.00</div><div class="mcs" id="mPct">0.00%</div></div>
+      <div class="mc"><div class="mcl" id="md4">剩余现金 (MYR)</div><div class="mcv teal" id="mC">RM 0.00</div><div class="mcs" id="md4s">未投入余额</div></div>
     </div>
   </div>
 
-  <!-- Deposit Form -->
-
-  <div class="section">
-    <div class="section-title" id="sec-dep">🏦 记录存款 (Moomoo Deposit)</div>
-    <div class="form-grid">
-      <div class="form-group"><label id="lf-da">存款金额 (USD)</label><input id="depAmount" type="number" placeholder="1000.00" min="0" step="any" inputmode="decimal"></div>
-      <div class="form-group"><label id="lf-dd">日期</label><input id="depDate" type="date"></div>
-      <div class="form-group"><label id="lf-dn">备注 (可选)</label><input id="depNote" type="text" placeholder="如：银行转账" autocomplete="off"></div>
+  <!-- Deposit -->
+  <div class="sec">
+    <div class="stitle" id="sd">🏦 记录存款 (Moomoo Deposit)</div>
+    <div class="fg">
+      <div class="fi"><label id="da">存款金额 (USD)</label><input id="depAmt" type="number" placeholder="1000.00" min="0" step="any" inputmode="decimal"></div>
+      <div class="fi"><label id="dd">日期</label><input id="depDate" type="date"></div>
+      <div class="fi"><label id="dn">备注 (可选)</label><input id="depNote" type="text" placeholder="如：银行转账" autocomplete="off"></div>
     </div>
-    <div style="margin-top:12px"><button class="btn btn-teal" onclick="addDeposit()">💰 <span id="btn-dep">记录存款</span></button></div>
+    <div style="margin-top:12px"><button class="btn bt" onclick="addDep()">💰 <span id="bdep">记录存款</span></button></div>
   </div>
 
-  <!-- Trade Form -->
-
-  <div class="section">
-    <div class="section-title" id="sec-trade">📊 添加交易</div>
-    <div class="form-grid">
-      <div class="form-group"><label id="lf-type">类型</label><select id="txType"><option value="buy" id="opt-buy">买入 BUY</option><option value="sell" id="opt-sell">卖出 SELL</option></select></div>
-      <div class="form-group"><label id="lf-ticker">股票代码</label><input id="txTicker" type="text" placeholder="AAPL" style="text-transform:uppercase" autocomplete="off" autocorrect="off" spellcheck="false"></div>
-      <div class="form-group"><label id="lf-shares">股数</label><input id="txShares" type="number" placeholder="10" min="0" step="any" inputmode="decimal"></div>
-      <div class="form-group"><label id="lf-price">价格/股 (USD)</label><input id="txPrice" type="number" placeholder="150.00" min="0" step="any" inputmode="decimal"></div>
-      <div class="form-group"><label id="lf-fee">平台费 (USD)</label><input id="txFee" type="number" placeholder="0.00" min="0" step="any" value="0" inputmode="decimal"></div>
-      <div class="form-group"><label id="lf-date">日期</label><input id="txDate" type="date"></div>
+  <!-- Trade -->
+  <div class="sec">
+    <div class="stitle" id="str">📊 添加交易</div>
+    <div class="fg">
+      <div class="fi"><label id="ft">类型</label><select id="txType"><option value="buy" id="obuy">买入 BUY</option><option value="sell" id="osell">卖出 SELL</option></select></div>
+      <div class="fi"><label id="ftk">股票代码</label><input id="txTk" type="text" placeholder="AAPL" style="text-transform:uppercase" autocomplete="off" spellcheck="false"></div>
+      <div class="fi"><label id="fsh">股数</label><input id="txSh" type="number" placeholder="10" min="0" step="any" inputmode="decimal"></div>
+      <div class="fi"><label id="fpr">价格/股 (USD)</label><input id="txPr" type="number" placeholder="150.00" min="0" step="any" inputmode="decimal"></div>
+      <div class="fi"><label id="ffe">平台费 (USD)</label><input id="txFe" type="number" placeholder="0.00" min="0" step="any" value="0" inputmode="decimal"></div>
+      <div class="fi"><label id="fdt">日期</label><input id="txDate" type="date"></div>
     </div>
-    <div style="margin-top:12px"><button class="btn btn-primary" onclick="addTransaction()">➕ <span id="btn-trade">记录交易</span></button></div>
+    <div style="margin-top:12px"><button class="btn bp" onclick="addTx()">➕ <span id="btrd">记录交易</span></button></div>
   </div>
 
   <!-- Tabs -->
-
-  <div class="section">
-    <div class="tab-row">
-      <button class="tab active" id="tbn-h" onclick="switchTab('holdings',this)">持仓概览</button>
-      <button class="tab" id="tbn-p" onclick="switchTab('prices',this)">更新价格</button>
-      <button class="tab" id="tbn-t" onclick="switchTab('transactions',this)">所有记录</button>
+  <div class="sec">
+    <div class="tabrow">
+      <button class="tab on" id="tbh" onclick="sw('holdings',this)">持仓概览</button>
+      <button class="tab" id="tbp" onclick="sw('prices',this)">更新价格</button>
+      <button class="tab" id="tbt" onclick="sw('transactions',this)">所有记录</button>
     </div>
     <div id="tab-holdings">
-      <div class="table-wrap"><table><thead><tr>
-        <th id="th-s">股票</th><th id="th-sh">股数</th><th id="th-ac">均价</th>
-        <th id="th-cp">现价</th><th id="th-cb">本金</th><th id="th-mv">市值</th>
-        <th id="th-pn">盈亏</th><th id="th-rt">回报率</th>
-      </tr></thead><tbody id="holdingsBody"></tbody></table></div>
+      <div class="tw"><table><thead><tr>
+        <th id="ths">股票</th><th id="thsh">股数</th><th id="thac">均价</th>
+        <th id="thcp">现价</th><th id="thcb">本金</th><th id="thmv">市值</th>
+        <th id="thpn">盈亏</th><th id="thrt">回报率</th>
+      </tr></thead><tbody id="hBody"></tbody></table></div>
     </div>
     <div id="tab-prices" style="display:none">
-      <p id="price-hint" style="font-size:0.79rem;color:var(--text3);margin-bottom:12px">输入各股票最新价格来刷新盈亏</p>
-      <div class="price-grid" id="priceGrid"></div>
-      <div style="margin-top:12px"><button class="btn btn-primary" onclick="updatePrices()">✅ <span id="btn-upd">更新价格</span></button></div>
+      <p id="ph" style="font-size:.79rem;color:var(--text3);margin-bottom:12px">输入各股票最新价格来刷新盈亏</p>
+      <div class="pgrid" id="pGrid"></div>
+      <div style="margin-top:12px"><button class="btn bp" onclick="updPrices()">✅ <span id="bupd">更新价格</span></button></div>
     </div>
-    <div id="tab-transactions" style="display:none"><div class="tx-list" id="txList"></div></div>
+    <div id="tab-transactions" style="display:none"><div class="txlist" id="txList"></div></div>
   </div>
 
 </div>
 
 <script>
-  // ── State ──
-  let lang = localStorage.getItem('inv_lang') || 'zh';
-  let theme = localStorage.getItem('inv_theme') || 'dark';
-  let transactions = JSON.parse(localStorage.getItem('inv_transactions') || '[]');
-  let deposits = JSON.parse(localStorage.getItem('inv_deposits') || '[]');
-  let currentPrices = JSON.parse(localStorage.getItem('inv_prices') || '{}');
-  let myrRate = parseFloat(localStorage.getItem('inv_myr') || '4.7');
+// ── State ──
+var lang  = localStorage.getItem('inv_lang')  || 'zh';
+var theme = localStorage.getItem('inv_theme') || 'dark';
+var txs   = JSON.parse(localStorage.getItem('inv_txs')  || '[]');
+var deps  = JSON.parse(localStorage.getItem('inv_deps') || '[]');
+var prc   = JSON.parse(localStorage.getItem('inv_prc')  || '{}');
+var myr   = parseFloat(localStorage.getItem('inv_myr')  || '4.7');
 
-  // Init
-  document.getElementById('txDate').valueAsDate = new Date();
-  document.getElementById('depDate').valueAsDate = new Date();
-  document.getElementById('myrRate').value = myrRate;
-  if (theme === 'light') { document.body.classList.add('light'); document.getElementById('theme-btn').textContent = '🌙'; }
+document.getElementById('txDate').valueAsDate  = new Date();
+document.getElementById('depDate').valueAsDate = new Date();
+document.getElementById('myrRate').value = myr;
 
-  // ── i18n ──
-  const I = {
-    'h-title':       ['投资追踪器','Investment Tracker'],
-    'lbl-deposit':   ['总存款','Total Deposited'],
-    'sub-deposit':   ['USD · Cash In','USD · Cash In'],
-    'lbl-invested':  ['已投本金','Invested'],
-    'sub-invested':  ['买股 + 手续费','Stocks + fees'],
-    'lbl-cash':      ['剩余现金','Cash Left'],
-    'sub-cash':      ['存款 - 已投','Deposited - Invested'],
-    'lbl-value':     ['当前市值','Market Value'],
-    'sub-value':     ['USD','USD'],
-    'lbl-pnl':       ['总盈亏','Total PnL'],
-    'lbl-fees':      ['手续费','Fees'],
-    'sub-fees':      ['USD','USD'],
-    'myr-title':     ['马币影响 (MYR Impact)','MYR Impact'],
-    'myr-rate-lbl':  ['USD/MYR 汇率：','USD/MYR Rate:'],
-    'myr-rate-hint': ['手动输入今日汇率','Enter today\'s rate manually'],
-    'myr-dep-lbl':   ['存款 (MYR)','Deposited (MYR)'],
-    'myr-dep-sub':   ['总共出了多少马币','Total MYR put in'],
-    'myr-val-lbl':   ['市值 (MYR)','Market Value (MYR)'],
-    'myr-val-sub':   ['现在值多少马币','Current value in MYR'],
-    'myr-pnl-lbl':   ['净盈亏 (MYR)','Net PnL (MYR)'],
-    'myr-cash-lbl':  ['剩余现金 (MYR)','Cash Remaining (MYR)'],
-    'myr-cash-sub':  ['未投入余额','Uninvested balance'],
-    'sec-dep':       ['🏦 记录存款 (Moomoo Deposit)','🏦 Record Deposit (Moomoo)'],
-    'lf-da':         ['存款金额 (USD)','Amount (USD)'],
-    'lf-dd':         ['日期','Date'],
-    'lf-dn':         ['备注 (可选)','Note (optional)'],
-    'btn-dep':       ['记录存款','Add Deposit'],
-    'sec-trade':     ['📊 添加交易','📊 Add Trade'],
-    'lf-type':       ['类型','Type'],
-    'opt-buy':       ['买入 BUY','BUY'],
-    'opt-sell':      ['卖出 SELL','SELL'],
-    'lf-ticker':     ['股票代码','Ticker'],
-    'lf-shares':     ['股数','Shares'],
-    'lf-price':      ['价格/股 (USD)','Price/share (USD)'],
-    'lf-fee':        ['平台费 (USD)','Platform Fee (USD)'],
-    'lf-date':       ['日期','Date'],
-    'btn-trade':     ['记录交易','Add Trade'],
-    'tbn-h':         ['持仓概览','Holdings'],
-    'tbn-p':         ['更新价格','Update Prices'],
-    'tbn-t':         ['所有记录','All Records'],
-    'price-hint':    ['输入各股票最新价格来刷新盈亏','Enter latest prices to refresh PnL'],
-    'btn-upd':       ['更新价格','Update Prices'],
-    'th-s':          ['股票','Stock'],
-    'th-sh':         ['股数','Shares'],
-    'th-ac':         ['均价','Avg Cost'],
-    'th-cp':         ['现价','Cur. Price'],
-    'th-cb':         ['本金','Cost Basis'],
-    'th-mv':         ['市值','Mkt Value'],
-    'th-pn':         ['盈亏','PnL'],
-    'th-rt':         ['回报率','Return'],
-  };
+// ── Theme — runs immediately, no dependencies ──
+function applyTheme() {
+  var isLight = (theme === 'light');
+  document.body.classList.toggle('light', isLight);
+  document.getElementById('thbtn').textContent = isLight ? '🌙' : '☀️';
+  document.getElementById('thbtn').classList.toggle('on', true);
+  document.getElementById('tcmeta').content = isLight ? '#7c3aed' : '#141428';
+}
+applyTheme();
 
-  function applyLang() {
-    const i = lang === 'zh' ? 0 : 1;
-    for (const [id, vals] of Object.entries(I)) {
-      const el = document.getElementById(id);
-      if (el) el.textContent = vals[i];
-    }
-    document.getElementById('depNote').placeholder = lang === 'zh' ? '如：银行转账' : 'e.g. bank transfer';
+function toggleTheme() {
+  theme = (theme === 'dark') ? 'light' : 'dark';
+  localStorage.setItem('inv_theme', theme);
+  applyTheme();
+}
+
+// ── i18n ──
+var I = {
+  'ht':  ['投资追踪器','Investment Tracker'],
+  'l1':  ['总存款','Total Deposited'],
+  'l2':  ['已投本金','Invested'],
+  'l2s': ['买股+手续费','Stocks + fees'],
+  'l3':  ['剩余现金','Cash Left'],
+  'l3s': ['存款-已投','Deposited - Invested'],
+  'l4':  ['当前市值','Market Value'],
+  'l5':  ['总盈亏','Total PnL'],
+  'l6':  ['手续费','Fees'],
+  'mt':  ['马币影响 (MYR Impact)','MYR Impact'],
+  'mrl': ['USD/MYR 汇率：','USD/MYR Rate:'],
+  'mrh': ['手动输入今日汇率',"Enter today's rate"],
+  'md1': ['存款 (MYR)','Deposited (MYR)'],
+  'md1s':['总共出了多少马币','Total MYR put in'],
+  'md2': ['市值 (MYR)','Market Value (MYR)'],
+  'md2s':['现在值多少马币','Current value in MYR'],
+  'md3': ['净盈亏 (MYR)','Net PnL (MYR)'],
+  'md4': ['剩余现金 (MYR)','Cash Remaining (MYR)'],
+  'md4s':['未投入余额','Uninvested balance'],
+  'sd':  ['🏦 记录存款 (Moomoo Deposit)','🏦 Record Deposit (Moomoo)'],
+  'da':  ['存款金额 (USD)','Amount (USD)'],
+  'dd':  ['日期','Date'],
+  'dn':  ['备注 (可选)','Note (optional)'],
+  'bdep':['记录存款','Add Deposit'],
+  'str': ['📊 添加交易','📊 Add Trade'],
+  'ft':  ['类型','Type'],
+  'obuy':['买入 BUY','BUY'],
+  'osell':['卖出 SELL','SELL'],
+  'ftk': ['股票代码','Ticker'],
+  'fsh': ['股数','Shares'],
+  'fpr': ['价格/股 (USD)','Price/share (USD)'],
+  'ffe': ['平台费 (USD)','Platform Fee (USD)'],
+  'fdt': ['日期','Date'],
+  'btrd':['记录交易','Add Trade'],
+  'tbh': ['持仓概览','Holdings'],
+  'tbp': ['更新价格','Update Prices'],
+  'tbt': ['所有记录','All Records'],
+  'ph':  ['输入各股票最新价格来刷新盈亏','Enter latest prices to refresh PnL'],
+  'bupd':['更新价格','Update Prices'],
+  'ths': ['股票','Stock'],'thsh':['股数','Shares'],'thac':['均价','Avg Cost'],
+  'thcp':['现价','Price'],'thcb':['本金','Cost'],'thmv':['市值','Value'],
+  'thpn':['盈亏','PnL'],'thrt':['回报率','Return']
+};
+
+function applyLang() {
+  var i = lang==='zh' ? 0 : 1;
+  for (var id in I) { var el=document.getElementById(id); if(el) el.textContent=I[id][i]; }
+  document.getElementById('depNote').placeholder = lang==='zh' ? '如：银行转账' : 'e.g. bank transfer';
+}
+
+function setLang(l, btn) {
+  lang = l; localStorage.setItem('inv_lang', l);
+  document.querySelectorAll('#ltg .tbtn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  applyLang(); render();
+}
+
+function saveMyr() { myr = parseFloat(document.getElementById('myrRate').value)||4.7; localStorage.setItem('inv_myr', myr); }
+function t(zh,en){ return lang==='zh'?zh:en; }
+function fu(n){ return '$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fm(n){ return 'RM '+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+function save() {
+  localStorage.setItem('inv_txs',  JSON.stringify(txs));
+  localStorage.setItem('inv_deps', JSON.stringify(deps));
+  localStorage.setItem('inv_prc',  JSON.stringify(prc));
+}
+
+// ── Deposit ──
+function addDep() {
+  var amt  = parseFloat(document.getElementById('depAmt').value);
+  var date = document.getElementById('depDate').value;
+  var note = document.getElementById('depNote').value.trim();
+  if (isNaN(amt)||amt<=0||!date) { alert(t('请填写存款金额和日期！','Please enter amount and date!')); return; }
+  deps.unshift({id:Date.now(),amount:amt,date:date,note:note});
+  save(); render();
+  document.getElementById('depAmt').value='';
+  document.getElementById('depNote').value='';
+}
+function delDep(id){ deps=deps.filter(function(d){return d.id!==id;}); save(); render(); }
+
+// ── Trade ──
+function addTx() {
+  var type = document.getElementById('txType').value;
+  var tk   = document.getElementById('txTk').value.trim().toUpperCase();
+  var sh   = parseFloat(document.getElementById('txSh').value);
+  var pr   = parseFloat(document.getElementById('txPr').value);
+  var fe   = parseFloat(document.getElementById('txFe').value)||0;
+  var date = document.getElementById('txDate').value;
+  if (!tk||isNaN(sh)||isNaN(pr)||!date) { alert(t('请填写股票代码、股数、价格和日期！','Please fill ticker, shares, price and date!')); return; }
+  txs.unshift({id:Date.now(),type:type,ticker:tk,shares:sh,price:pr,fee:fe,date:date});
+  if (!prc[tk]) prc[tk]=pr;
+  save(); render();
+  document.getElementById('txTk').value='';
+  document.getElementById('txSh').value='';
+  document.getElementById('txPr').value='';
+  document.getElementById('txFe').value='0';
+}
+function delTx(id){ txs=txs.filter(function(x){return x.id!==id;}); save(); render(); }
+
+function updPrices() {
+  document.querySelectorAll('.pinput').forEach(function(inp){
+    var v=parseFloat(inp.value);
+    if(!isNaN(v)&&v>0) prc[inp.dataset.ticker]=v;
+  });
+  save(); render();
+}
+
+// ── Holdings calc ──
+function getHoldings() {
+  var h={};
+  txs.slice().sort(function(a,b){return new Date(a.date)-new Date(b.date);}).forEach(function(tx){
+    if(!h[tx.ticker]) h[tx.ticker]={ticker:tx.ticker,shares:0,cost:0,fees:0};
+    var e=h[tx.ticker];
+    if(tx.type==='buy'){e.cost+=tx.shares*tx.price;e.fees+=tx.fee;e.shares+=tx.shares;}
+    else{var avg=e.shares>0?e.cost/e.shares:0;e.cost-=avg*tx.shares;e.fees+=tx.fee;e.shares-=tx.shares;if(e.shares<0.0001)e.shares=0;}
+  });
+  return Object.values(h).filter(function(e){return e.shares>0.0001;});
+}
+
+// ── Render ──
+function render() {
+  applyLang();
+  var holdings = getHoldings();
+  var rate = parseFloat(document.getElementById('myrRate').value)||myr;
+  var totDep=deps.reduce(function(s,d){return s+d.amount;},0);
+  var totInv=0,totVal=0,totFee=0;
+  holdings.forEach(function(h){
+    var cp=prc[h.ticker]||(h.cost/(h.shares||1));
+    totInv+=h.cost+h.fees; totVal+=h.shares*cp; totFee+=h.fees;
+  });
+  var cash=totDep-totInv, pnl=totVal-totInv;
+  var pct=totInv>0?(pnl/totInv*100):0;
+
+  // USD cards
+  document.getElementById('sD').textContent=fu(totDep);
+  document.getElementById('sP').textContent=fu(totInv);
+  var cEl=document.getElementById('sC'); cEl.textContent=fu(cash); cEl.className='cv '+(cash>=0?'blue':'red');
+  document.getElementById('sV').textContent=fu(totVal);
+  document.getElementById('sF').textContent=fu(totFee);
+  var pEl=document.getElementById('sPnl'); pEl.textContent=(pnl>=0?'+':'-')+fu(pnl); pEl.className='cv '+(pnl>=0?'green':'red');
+  var pcEl=document.getElementById('sPct'); pcEl.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%'; pcEl.className='cs '+(pct>=0?'green':'red');
+
+  // MYR cards
+  document.getElementById('mD').textContent=fm(totDep*rate);
+  document.getElementById('mV').textContent=fm(totVal*rate);
+  var mpEl=document.getElementById('mPnl'); mpEl.textContent=(pnl>=0?'+':'-')+fm(Math.abs(pnl*rate)); mpEl.className='mcv '+(pnl>=0?'green':'red');
+  var mpcEl=document.getElementById('mPct'); mpcEl.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%'; mpcEl.className='mcs '+(pct>=0?'green':'red');
+  var mcEl=document.getElementById('mC'); mcEl.textContent=fm(Math.abs(cash*rate)); mcEl.className='mcv '+(cash>=0?'teal':'red');
+
+  // Holdings table
+  var tb=document.getElementById('hBody');
+  if(!holdings.length){
+    tb.innerHTML='<tr><td colspan="8"><div class="empty"><div class="ic">📊</div>'+t('还没有持仓，添加第一笔交易吧！','No holdings yet. Add your first trade!')+'</div></td></tr>';
+  } else {
+    tb.innerHTML=holdings.map(function(h){
+      var avg=h.shares>0?h.cost/h.shares:0;
+      var cp=prc[h.ticker]||avg;
+      var base=h.cost+h.fees,val=h.shares*cp,p=val-base,pc=base>0?(p/base*100):0;
+      return '<tr><td><span class="badge">'+h.ticker+'</span></td><td>'+(+h.shares.toFixed(4))+'</td><td>$'+avg.toFixed(2)+'</td><td>$'+cp.toFixed(2)+'</td><td>'+fu(base)+'</td><td>'+fu(val)+'</td><td class="'+(p>=0?'green':'red')+'">'+(p>=0?'+':'-')+fu(p)+'</td><td class="'+(pc>=0?'green':'red')+'">'+(pc>=0?'+':'')+pc.toFixed(2)+'%</td></tr>';
+    }).join('');
   }
 
-  function setLang(l, btn) {
-    lang = l;
-    localStorage.setItem('inv_lang', l);
-    document.querySelectorAll('.toggle-group:first-child .tgl-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    applyLang();
-    render();
+  // Price grid
+  var tickers=[...new Set(holdings.map(function(h){return h.ticker;}))];
+  var pg=document.getElementById('pGrid');
+  if(!tickers.length){
+    pg.innerHTML='<div class="empty"><div class="ic">💰</div>'+t('添加交易后在这里更新股价','Add trades, then update prices here')+'</div>';
+  } else {
+    pg.innerHTML=tickers.map(function(tk){
+      return '<div class="pi"><div class="ptk">'+tk+'</div><input class="pinput" data-ticker="'+tk+'" type="number" step="any" min="0" inputmode="decimal" value="'+(prc[tk]||'')+'" placeholder="'+t('最新价格','Latest price')+'"></div>';
+    }).join('');
   }
 
-  function toggleTheme() {
-    theme = theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('inv_theme', theme);
-    document.body.classList.toggle('light', theme === 'light');
-    document.getElementById('theme-btn').textContent = theme === 'light' ? '🌙' : '☀️';
+  // All records
+  var all=deps.map(function(d){return Object.assign({},d,{rt:'dep'});})
+    .concat(txs.map(function(x){return Object.assign({},x,{rt:'tx'});}))
+    .sort(function(a,b){return new Date(b.date)-new Date(a.date)||b.id-a.id;});
+  var tl=document.getElementById('txList');
+  if(!all.length){
+    tl.innerHTML='<div class="empty"><div class="ic">📋</div>'+t('暂无记录','No records yet')+'</div>';
+  } else {
+    tl.innerHTML=all.map(function(r){
+      if(r.rt==='dep'){
+        return '<div class="txi"><div class="txl"><div class="txic dep">🏦</div><div class="txin"><div class="nm">'+t('存款','Deposit')+(r.note?' · '+r.note:'')+'</div><div class="dt">Moomoo · '+fm(r.amount*rate)+'</div></div></div><div class="txr"><div class="am green">+'+fu(r.amount)+'</div><div class="da">'+r.date+'</div><div class="dl"><button class="btn bd" onclick="delDep('+r.id+')">'+t('删除','Del')+'</button></div></div></div>';
+      }
+      var tot=r.shares*r.price+r.fee,buy=r.type==='buy';
+      return '<div class="txi"><div class="txl"><div class="txic '+r.type+'">'+(buy?'📈':'📉')+'</div><div class="txin"><div class="nm">'+(buy?t('买入','BUY'):t('卖出','SELL'))+' <strong>'+r.ticker+'</strong></div><div class="dt">'+r.shares+' '+t('股','sh')+' × $'+r.price.toFixed(2)+(r.fee>0?' +$'+r.fee.toFixed(2)+' fee':'')+'</div></div></div><div class="txr"><div class="am '+(buy?'red':'green')+'">'+(buy?'-':'+')+fu(tot)+'</div><div class="da">'+r.date+'</div><div class="dl"><button class="btn bd" onclick="delTx('+r.id+')">'+t('删除','Del')+'</button></div></div></div>';
+    }).join('');
   }
+}
 
-  function saveMyr() {
-    myrRate = parseFloat(document.getElementById('myrRate').value) || 4.7;
-    localStorage.setItem('inv_myr', myrRate);
-  }
+function sw(name,btn){
+  ['holdings','prices','transactions'].forEach(function(n){
+    document.getElementById('tab-'+n).style.display=n===name?'':'none';
+  });
+  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
 
-  function t(zh, en) { return lang === 'zh' ? zh : en; }
-  function fmtUSD(n) { return '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-  function fmtMYR(n) { return 'RM ' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+// Init lang buttons
+if(lang==='en'){
+  var lb=document.querySelectorAll('#ltg .tbtn');
+  lb[0].classList.remove('on'); lb[1].classList.add('on');
+}
 
-  // ── Save ──
-  function save() {
-    localStorage.setItem('inv_transactions', JSON.stringify(transactions));
-    localStorage.setItem('inv_deposits', JSON.stringify(deposits));
-    localStorage.setItem('inv_prices', JSON.stringify(currentPrices));
-  }
+// PWA manifest
+var mf={name:'投资追踪器',short_name:'投资追踪',display:'standalone',background_color:'#141428',theme_color:'#141428',start_url:'.',icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141428'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334d399' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%2334d399' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolyline points='12,72 28,58 44,62 58,38 72,30 88,18' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='12,72 28,58 44,62 58,38 72,30 88,18 88,85 12,85' fill='url(%23g)'/%3E%3Ccircle cx='88' cy='18' r='5' fill='%2334d399'/%3E%3C/svg%3E",sizes:'512x512',type:'image/svg+xml'}]};
+var mb=new Blob([JSON.stringify(mf)],{type:'application/json'});
+document.getElementById('pwa-manifest').href=URL.createObjectURL(mb);
 
-  // ── Deposit ──
-  function addDeposit() {
-    const amount = parseFloat(document.getElementById('depAmount').value);
-    const date   = document.getElementById('depDate').value;
-    const note   = document.getElementById('depNote').value.trim();
-    if (isNaN(amount) || amount <= 0 || !date) { alert(t('请填写存款金额和日期！','Please enter amount and date!')); return; }
-    deposits.unshift({ id: Date.now(), amount, date, note });
-    save(); render();
-    document.getElementById('depAmount').value = '';
-    document.getElementById('depNote').value = '';
-  }
-  function deleteDeposit(id) { deposits = deposits.filter(d => d.id !== id); save(); render(); }
+// iOS install hint
+var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+if(isIOS&&!window.navigator.standalone&&!localStorage.getItem('pwa_hint')){
+  setTimeout(function(){
+    var b=document.createElement('div');
+    b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,.3)';
+    b.innerHTML='<div style="font-size:1.8rem">📲</div><div style="flex:1"><div style="font-weight:700;font-size:.9rem">加到主屏幕 / Add to Home Screen</div><div style="font-size:.75rem;opacity:.85;margin-top:2px">点 <strong>分享</strong> 按钮 → <strong>加入主屏幕</strong> ✨</div></div><button onclick="this.parentElement.remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.82rem;font-weight:600">OK</button>';
+    document.body.appendChild(b);
+    localStorage.setItem('pwa_hint','1');
+  },1500);
+}
 
-  // ── Trade ──
-  function addTransaction() {
-    const type   = document.getElementById('txType').value;
-    const ticker = document.getElementById('txTicker').value.trim().toUpperCase();
-    const shares = parseFloat(document.getElementById('txShares').value);
-    const price  = parseFloat(document.getElementById('txPrice').value);
-    const fee    = parseFloat(document.getElementById('txFee').value) || 0;
-    const date   = document.getElementById('txDate').value;
-    if (!ticker || isNaN(shares) || isNaN(price) || !date) { alert(t('请填写股票代码、股数、价格和日期！','Please fill ticker, shares, price and date!')); return; }
-    transactions.unshift({ id: Date.now(), type, ticker, shares, price, fee, date });
-    if (!currentPrices[ticker]) currentPrices[ticker] = price;
-    save(); render();
-    document.getElementById('txTicker').value = '';
-    document.getElementById('txShares').value = '';
-    document.getElementById('txPrice').value  = '';
-    document.getElementById('txFee').value    = '0';
-  }
-  function deleteTransaction(id) { transactions = transactions.filter(tx => tx.id !== id); save(); render(); }
-
-  function updatePrices() {
-    document.querySelectorAll('.price-input').forEach(inp => {
-      const v = parseFloat(inp.value);
-      if (!isNaN(v) && v > 0) currentPrices[inp.dataset.ticker] = v;
-    });
-    save(); render();
-  }
-
-  // ── Holdings ──
-  function getHoldings() {
-    const h = {};
-    [...transactions].sort((a,b) => new Date(a.date)-new Date(b.date)).forEach(tx => {
-      if (!h[tx.ticker]) h[tx.ticker] = { ticker:tx.ticker, shares:0, totalCost:0, totalFees:0 };
-      const e = h[tx.ticker];
-      if (tx.type === 'buy') { e.totalCost += tx.shares*tx.price; e.totalFees += tx.fee; e.shares += tx.shares; }
-      else { const avg = e.shares>0?e.totalCost/e.shares:0; e.totalCost -= avg*tx.shares; e.totalFees += tx.fee; e.shares -= tx.shares; if (e.shares<0.0001) e.shares=0; }
-    });
-    return Object.values(h).filter(e => e.shares > 0.0001);
-  }
-
-  // ── Render ──
-  function render() {
-    applyLang();
-    const holdings = getHoldings();
-    const rate = parseFloat(document.getElementById('myrRate').value) || myrRate;
-
-    const totalDeposited = deposits.reduce((s,d) => s+d.amount, 0);
-    let totalInvested=0, totalValue=0, totalFees=0;
-    holdings.forEach(h => {
-      const cp = currentPrices[h.ticker] || (h.totalCost/(h.shares||1));
-      totalInvested += h.totalCost + h.totalFees;
-      totalValue    += h.shares * cp;
-      totalFees     += h.totalFees;
-    });
-    const cashUSD = totalDeposited - totalInvested;
-    const pnl     = totalValue - totalInvested;
-    const pnlPct  = totalInvested>0 ? (pnl/totalInvested*100) : 0;
-
-    // USD cards
-    document.getElementById('sumDeposit').textContent   = fmtUSD(totalDeposited);
-    document.getElementById('sumPrincipal').textContent = fmtUSD(totalInvested);
-    const cashEl = document.getElementById('sumCash');
-    cashEl.textContent = fmtUSD(cashUSD);
-    cashEl.className   = 'card-value ' + (cashUSD>=0?'blue':'red');
-    document.getElementById('sumValue').textContent = fmtUSD(totalValue);
-    document.getElementById('sumFees').textContent  = fmtUSD(totalFees);
-    const pnlEl = document.getElementById('sumPnl');
-    pnlEl.textContent = (pnl>=0?'+':'-') + fmtUSD(pnl);
-    pnlEl.className   = 'card-value ' + (pnl>=0?'green':'red');
-    const pctEl = document.getElementById('sumPnlPct');
-    pctEl.textContent = (pnlPct>=0?'+':'') + pnlPct.toFixed(2) + '%';
-    pctEl.className   = 'card-sub ' + (pnlPct>=0?'green':'red');
-
-    // MYR cards
-    const myrDep  = totalDeposited * rate;
-    const myrVal  = totalValue * rate;
-    const myrPnlV = pnl * rate;
-    const myrCash = cashUSD * rate;
-    document.getElementById('myrDeposit').textContent = fmtMYR(myrDep);
-    document.getElementById('myrValue').textContent   = fmtMYR(myrVal);
-    const myrPnlEl = document.getElementById('myrPnl');
-    myrPnlEl.textContent = (myrPnlV>=0?'+':'-') + fmtMYR(myrPnlV);
-    myrPnlEl.className   = 'myr-card-value ' + (myrPnlV>=0?'green':'red');
-    const myrPnlSub = document.getElementById('myrPnlSub');
-    myrPnlSub.textContent = (pnlPct>=0?'+':'') + pnlPct.toFixed(2) + '%';
-    myrPnlSub.className   = 'myr-card-sub ' + (pnlPct>=0?'green':'red');
-    const myrCashEl = document.getElementById('myrCash');
-    myrCashEl.textContent = fmtMYR(myrCash);
-    myrCashEl.className   = 'myr-card-value ' + (myrCash>=0?'teal':'red');
-
-    // Holdings table
-    const tbody = document.getElementById('holdingsBody');
-    if (holdings.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="icon">📊</div>'+t('还没有持仓记录，添加第一笔交易吧！','No holdings yet. Add your first trade!')+'</div></td></tr>';
-    } else {
-      tbody.innerHTML = holdings.map(h => {
-        const avg  = h.shares>0 ? h.totalCost/h.shares : 0;
-        const cp   = currentPrices[h.ticker] || avg;
-        const base = h.totalCost + h.totalFees;
-        const val  = h.shares * cp;
-        const p    = val - base;
-        const pct  = base>0 ? (p/base*100) : 0;
-        return '<tr><td><span class="ticker-badge">'+h.ticker+'</span></td><td>'+(+h.shares.toFixed(4))+'</td><td>$'+avg.toFixed(2)+'</td><td>$'+cp.toFixed(2)+'</td><td>'+fmtUSD(base)+'</td><td>'+fmtUSD(val)+'</td><td class="'+(p>=0?'green':'red')+'">'+(p>=0?'+':'-')+fmtUSD(p)+'</td><td class="'+(pct>=0?'green':'red')+'">'+(pct>=0?'+':'')+pct.toFixed(2)+'%</td></tr>';
-      }).join('');
-    }
-
-    // Price grid
-    const tickers = [...new Set(holdings.map(h => h.ticker))];
-    const pg = document.getElementById('priceGrid');
-    if (tickers.length === 0) {
-      pg.innerHTML = '<div class="empty-state"><div class="icon">💰</div>'+t('添加交易后更新最新股价','Add trades, then update prices here')+'</div>';
-    } else {
-      pg.innerHTML = tickers.map(tk => '<div class="price-item"><div class="pticker">'+tk+'</div><input class="price-input" data-ticker="'+tk+'" type="number" step="any" min="0" inputmode="decimal" value="'+(currentPrices[tk]||'')+'" placeholder="'+t('最新价格','Latest price')+'"></div>').join('');
-    }
-
-    // All records
-    const all = [
-      ...deposits.map(d => ({...d, rtype:'deposit'})),
-      ...transactions.map(tx => ({...tx, rtype:'trade'}))
-    ].sort((a,b) => new Date(b.date)-new Date(a.date) || b.id-a.id);
-
-    const txList = document.getElementById('txList');
-    if (all.length === 0) {
-      txList.innerHTML = '<div class="empty-state"><div class="icon">📋</div>'+t('暂无记录','No records yet')+'</div>';
-    } else {
-      txList.innerHTML = all.map(r => {
-        if (r.rtype === 'deposit') {
-          const myr = (r.amount*rate);
-          return '<div class="tx-item"><div class="tx-left"><div class="tx-icon deposit">🏦</div><div class="tx-info"><div class="name">'+t('存款','Deposit')+(r.note?' · '+r.note:'')+'</div><div class="detail">Moomoo · '+fmtMYR(myr)+'</div></div></div><div class="tx-right"><div class="amount green">+'+fmtUSD(r.amount)+'</div><div class="date">'+r.date+'</div><div class="del"><button class="btn btn-danger" onclick="deleteDeposit('+r.id+')">'+t('删除','Del')+'</button></div></div></div>';
-        } else {
-          const total = r.shares*r.price + r.fee;
-          const isBuy = r.type === 'buy';
-          return '<div class="tx-item"><div class="tx-left"><div class="tx-icon '+r.type+'">'+(isBuy?'📈':'📉')+'</div><div class="tx-info"><div class="name">'+(isBuy?t('买入','BUY'):t('卖出','SELL'))+' <strong>'+r.ticker+'</strong></div><div class="detail">'+r.shares+' '+t('股','sh')+' × $'+r.price.toFixed(2)+(r.fee>0?' +$'+r.fee.toFixed(2)+' fee':'')+'</div></div></div><div class="tx-right"><div class="amount '+(isBuy?'red':'green')+'">'+(isBuy?'-':'+')+fmtUSD(total)+'</div><div class="date">'+r.date+'</div><div class="del"><button class="btn btn-danger" onclick="deleteTransaction('+r.id+')">'+t('删除','Del')+'</button></div></div></div>';
-        }
-      }).join('');
-    }
-  }
-
-  function switchTab(name, btn) {
-    ['holdings','prices','transactions'].forEach(n => document.getElementById('tab-'+n).style.display = n===name?'':'none');
-    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  // Init lang btn state
-  if (lang === 'en') {
-    const btns = document.querySelectorAll('.toggle-group:first-child .tgl-btn');
-    btns[0].classList.remove('active'); btns[1].classList.add('active');
-  }
-
-  render();
+render();
 </script>
-
-<script>
-  // ── PWA Manifest (inline) ──
-  const manifest = {
-    name: '投资追踪器 Investment Tracker',
-    short_name: '投资追踪',
-    description: 'Track your Moomoo investments in USD & MYR',
-    start_url: '.',
-    display: 'standalone',
-    background_color: '#0f0f13',
-    theme_color: '#1a1a2e',
-    orientation: 'portrait-primary',
-    icons: [
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1a2e'/%3E%3Ctext y='.9em' font-size='72' x='50' text-anchor='middle' dominant-baseline='hanging'%3E📈%3C/text%3E%3C/svg%3E", sizes: '192x192', type: 'image/svg+xml' },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1a2e'/%3E%3Ctext y='.9em' font-size='72' x='50' text-anchor='middle' dominant-baseline='hanging'%3E📈%3C/text%3E%3C/svg%3E", sizes: '512x512', type: 'image/svg+xml' }
-    ]
-  };
-  const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-  const manifestURL = URL.createObjectURL(blob);
-  document.getElementById('pwa-manifest').setAttribute('href', manifestURL);
-
-  // Update theme-color based on light/dark
-  function updateThemeColor() {
-    const isDark = !document.body.classList.contains('light');
-    document.getElementById('theme-color-meta').setAttribute('content', isDark ? '#1a1a2e' : '#7c3aed');
-  }
-
-  // Patch toggleTheme to also update theme-color
-  const _origToggle = toggleTheme;
-  window.toggleTheme = function() { _origToggle(); updateThemeColor(); };
-  updateThemeColor();
-
-  // ── iOS install hint (shows once) ──
-  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isStandalone = window.navigator.standalone;
-  const hintShown = localStorage.getItem('pwa_hint_shown');
-
-  if (isIOS && !isStandalone && !hintShown) {
-    setTimeout(() => {
-      const banner = document.createElement('div');
-      banner.id = 'install-banner';
-      banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:white;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,0.3);';
-      banner.innerHTML = '<div style="font-size:1.8rem">📲</div><div style="flex:1"><div style="font-weight:700;font-size:0.9rem">加到主屏幕 / Add to Home Screen</div><div style="font-size:0.75rem;opacity:0.85;margin-top:2px">点 <strong>分享</strong> 按钮 → <strong>加入主屏幕</strong> ✨</div></div><button onclick="document.getElementById('install-banner').remove();localStorage.setItem('pwa_hint_shown','1')" style="background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600">OK</button>';
-      document.body.appendChild(banner);
-    }, 1500);
-    localStorage.setItem('pwa_hint_shown', '1');
-  }
-</script>
-
 </body>
 </html>
