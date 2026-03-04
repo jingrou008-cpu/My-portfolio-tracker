@@ -5,125 +5,151 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="投资追踪">
-<meta name="theme-color" content="#141428" id="tcmeta">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141428'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334d399' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%2334d399' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolyline points='12,72 28,58 44,62 58,38 72,30 88,18' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='12,72 28,58 44,62 58,38 72,30 88,18 88,85 12,85' fill='url(%23g)'/%3E%3Ccircle cx='88' cy='18' r='5' fill='%2334d399'/%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="Portfolio">
+<meta name="theme-color" content="#0f0f13" id="tcmeta">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0f'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334d399' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%2334d399' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolyline points='12,72 28,58 44,62 58,38 72,30 88,18' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='12,72 28,58 44,62 58,38 72,30 88,18 88,85 12,85' fill='url(%23g)'/%3E%3Ccircle cx='88' cy='18' r='5' fill='%2334d399'/%3E%3C/svg%3E">
 <link rel="manifest" id="pwa-manifest">
-<title>投资追踪器</title>
+<title>Portfolio Tracker</title>
 <style>
-:root{
+:root {
   --bg:#0f0f13;--bg2:#1a1a2e;--bg3:#0f0f13;--border:#2d2d44;--border2:#1e1e2e;
-  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--hover:#ffffff08;
-  --card:#1a1a2e;--inp:#0f0f13;--sec:#1a1a2e;--txbg:#0f0f13;--pbg:#1a1a2e;
-  --tbg:#0f0f13;--shd:0 2px 12px rgba(0,0,0,.4);
-  --hbg:linear-gradient(135deg,#1a1a2e,#16213e);
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+  --card:#1a1a2e;--inp:#0f0f13;--sec:#1a1a2e;--txbg:#0f0f13;--tbg:#0f0f13;
+  --shd:0 2px 16px rgba(0,0,0,.4);--hbg:linear-gradient(135deg,#1a1a2e,#16213e);
+  --green:#34d399;--red:#f87171;--purple:#a78bfa;--blue:#60a5fa;--amber:#fbbf24;--teal:#5eead4;
 }
-body.light{
+body.light {
   --bg:#f1f5f9;--bg2:#fff;--bg3:#f8fafc;--border:#e2e8f0;--border2:#e9edf2;
-  --text:#1e293b;--text2:#475569;--text3:#94a3b8;--hover:#00000006;
-  --card:#fff;--inp:#f8fafc;--sec:#fff;--txbg:#f8fafc;--pbg:#f8fafc;
-  --tbg:#f1f5f9;--shd:0 2px 12px rgba(0,0,0,.08);
-  --hbg:linear-gradient(135deg,#7c3aed,#4f46e5);
+  --text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --card:#fff;--inp:#f8fafc;--sec:#fff;--txbg:#f8fafc;--tbg:#f1f5f9;
+  --shd:0 2px 16px rgba(0,0,0,.06);--hbg:linear-gradient(135deg,#7c3aed,#4f46e5);
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .25s,color .25s}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .25s,color .25s;}
+
 /* Header */
-.hdr{background:var(--hbg);padding:14px 20px;padding-top:max(14px,env(safe-area-inset-top));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:var(--shd)}
-.hdr h1{font-size:1.2rem;font-weight:700;color:#a78bfa}
-body.light .hdr h1{color:#fff}
-.hdr p{color:var(--text2);font-size:.75rem;margin-top:2px}
-body.light .hdr p{color:rgba(255,255,255,.8)}
-.hctl{display:flex;gap:8px;align-items:center}
-.tgrp{display:flex;background:var(--tbg);border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.tbtn{padding:6px 14px;border:none;cursor:pointer;font-size:.78rem;font-weight:600;background:transparent;color:var(--text3);transition:all .2s;white-space:nowrap}
-.tbtn.on{background:#a78bfa22;color:#a78bfa}
-body.light .tbtn.on{background:rgba(255,255,255,.25);color:#fff}
+.hdr{background:var(--hbg);padding:14px 18px;padding-top:max(14px,env(safe-area-inset-top));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:100;box-shadow:var(--shd);}
+.hdr h1{font-size:1.05rem;font-weight:700;color:var(--green);letter-spacing:-.01em;}
+body.light .hdr h1{color:#fff;}
+.hdr p{font-size:.65rem;color:var(--text3);margin-top:2px;letter-spacing:.05em;text-transform:uppercase;}
+body.light .hdr p{color:rgba(255,255,255,.6);}
+.hctl{display:flex;gap:6px;}
+.tgrp{display:flex;background:var(--tbg);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.tbtn{padding:5px 12px;border:none;cursor:pointer;font-size:.72rem;font-weight:600;background:transparent;color:var(--text3);transition:all .2s;}
+.tbtn.on{background:rgba(167,139,250,.15);color:var(--purple);}
+body.light .tgrp{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);}
+body.light .tbtn{color:rgba(255,255,255,.7);}
+body.light .tbtn.on{background:rgba(255,255,255,.25);color:#fff;}
+
+/* Rate bar */
+.ratebar{background:var(--bg2);border-bottom:1px solid var(--border);padding:7px 18px;display:flex;align-items:center;gap:10px;font-size:.72rem;color:var(--text3);}
+.ratebar label{white-space:nowrap;}
+.ratebar input{background:var(--inp);border:1px solid var(--border);border-radius:6px;padding:4px 8px;color:var(--text);font-size:.75rem;font-weight:600;outline:none;width:85px;}
+.ratebar input:focus{border-color:var(--purple);}
+
 /* Layout */
-.wrap{max-width:1100px;margin:0 auto;padding:16px;padding-bottom:max(20px,env(safe-area-inset-bottom));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
-/* Summary */
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:var(--shd)}
-.cl{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.cv{font-size:1.4rem;font-weight:700;line-height:1.2}
-.cs{font-size:.73rem;color:var(--text3);margin-top:4px}
-/* MYR */
-.mbox{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:18px;box-shadow:var(--shd)}
-.mtitle{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
-.mrate{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.mrate label{font-size:.8rem;color:var(--text2);white-space:nowrap}
-.mrate input{background:var(--inp);border:1px solid var(--border);border-radius:7px;padding:7px 11px;color:var(--text);font-size:.88rem;outline:none;width:110px}
-.mrate input:focus{border-color:#a78bfa}
-.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-.mc{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:13px 15px}
-.mcl{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.mcv{font-size:1.1rem;font-weight:700}
-.mcs{font-size:.72rem;color:var(--text3);margin-top:3px}
-/* Colors */
-.green{color:#34d399}.red{color:#f87171}.purple{color:#a78bfa}.blue{color:#60a5fa}.amber{color:#fbbf24}.teal{color:#2dd4bf}
+.wrap{max-width:860px;margin:0 auto;padding:14px;padding-bottom:max(24px,env(safe-area-inset-bottom));padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));}
+
+/* Hero */
+.hero{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px;margin-bottom:14px;box-shadow:var(--shd);position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(52,211,153,.07),transparent 70%);pointer-events:none;}
+.hero-lbl{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;}
+.hero-val{font-size:2rem;font-weight:700;color:var(--green);letter-spacing:-.03em;line-height:1;}
+.hero-sub{font-size:.68rem;color:var(--text3);margin-top:5px;}
+.pnl-badge{display:inline-flex;align-items:center;gap:5px;margin-top:10px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);border-radius:20px;padding:4px 12px;font-size:.75rem;font-weight:600;color:var(--green);}
+.pnl-badge.loss{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.2);color:var(--red);}
+
+/* Cards */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin-bottom:14px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:13px 15px;box-shadow:var(--shd);}
+.card.cm{border-color:rgba(251,191,36,.12);}
+.card.cu{border-color:rgba(96,165,250,.12);}
+.card.cp{border-color:rgba(52,211,153,.12);}
+.cl{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.cv{font-size:1.2rem;font-weight:700;letter-spacing:-.02em;line-height:1.2;}
+.cs{font-size:.65rem;color:var(--text3);margin-top:3px;}
+
+/* Divider label */
+.section-group-label{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin:16px 0 8px;padding-left:2px;}
+
 /* Section */
-.sec{background:var(--sec);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:var(--shd)}
-.stitle{font-size:.9rem;font-weight:600;color:#a78bfa;margin-bottom:14px}
-.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-.fi{display:flex;flex-direction:column;gap:4px}
-.fi label{font-size:.73rem;color:var(--text2)}
-.fi input,.fi select{background:var(--inp);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;width:100%;-webkit-appearance:none}
-.fi input:focus,.fi select:focus{border-color:#a78bfa}
-.fi select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
-.btn{padding:9px 20px;border-radius:8px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:6px;touch-action:manipulation}
-.bp{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff}
-.bt{background:linear-gradient(135deg,#0f766e,#0369a1);color:#fff}
-.bd{background:transparent;border:1px solid #f87171;color:#f87171;padding:5px 11px;font-size:.76rem;border-radius:6px}
-/* Table */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px}
-table{width:100%;border-collapse:collapse;font-size:.82rem}
-th{text-align:left;padding:8px 10px;color:var(--text3);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap;background:var(--sec)}
-td{padding:10px;border-bottom:1px solid var(--border2);white-space:nowrap}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--hover)}
-.badge{background:#a78bfa22;color:#a78bfa;padding:2px 8px;border-radius:20px;font-weight:600;font-size:.78rem;display:inline-block}
-/* Tx list */
-.txlist{display:flex;flex-direction:column;gap:8px}
-.txi{display:flex;align-items:center;justify-content:space-between;background:var(--txbg);border:1px solid var(--border2);border-radius:10px;padding:11px 13px;gap:8px}
-.txl{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
-.txic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
-.txic.buy{background:#34d39922}.txic.sell{background:#f8717122}.txic.dep{background:#fbbf2422}
-.txin{font-size:.81rem}
-.txin .nm{font-weight:600}
-.txin .dt{color:var(--text3);font-size:.73rem;margin-top:1px}
-.txr{text-align:right;flex-shrink:0}
-.txr .am{font-weight:600;font-size:.88rem}
-.txr .da{color:var(--text3);font-size:.7rem;margin-top:2px}
-.txr .dl{margin-top:5px}
-/* Price grid */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px}
-.pi{background:var(--pbg);border:1px solid var(--border);border-radius:8px;padding:11px;display:flex;flex-direction:column;gap:6px}
-.pi .ptk{color:#a78bfa;font-weight:600;font-size:.85rem}
-.pi input{background:var(--inp);border:1px solid var(--border);border-radius:6px;padding:7px 9px;color:var(--text);font-size:.85rem;outline:none;width:100%}
-.pi input:focus{border-color:#a78bfa}
+.sec{background:var(--sec);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:var(--shd);}
+.stitle{font-size:.8rem;font-weight:600;color:var(--text2);margin-bottom:13px;display:flex;align-items:center;gap:8px;}
+.sicon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.si-d{background:rgba(251,191,36,.12);}
+.si-f{background:rgba(45,212,191,.12);}
+.si-t{background:rgba(167,139,250,.12);}
+
+/* Form */
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:9px;}
+.fi{display:flex;flex-direction:column;gap:3px;}
+.fi label{font-size:.63rem;color:var(--text3);letter-spacing:.04em;text-transform:uppercase;}
+.fi input,.fi select{background:var(--inp);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-size:.83rem;outline:none;transition:border-color .2s;width:100%;-webkit-appearance:none;font-family:inherit;}
+.fi input:focus,.fi select:focus{border-color:var(--purple);}
+.fi select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%234a5068' d='M5 7L1 3h8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:24px;}
+.frow{margin-top:11px;display:flex;gap:8px;flex-wrap:wrap;}
+.btn{padding:8px 16px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:5px;touch-action:manipulation;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.bp{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;}
+.bt{background:linear-gradient(135deg,#b45309,#92400e);color:#fff;}
+.bfx{background:linear-gradient(135deg,#0f766e,#047857);color:#fff;}
+.bd{background:transparent;border:1px solid var(--border2);color:var(--text3);padding:4px 9px;font-size:.7rem;border-radius:6px;}
+.bd:hover{border-color:var(--red);color:var(--red);}
+
 /* Tabs */
-.tabrow{display:flex;gap:3px;margin-bottom:14px;flex-wrap:wrap}
-.tab{padding:7px 14px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:500;background:transparent;color:var(--text3);transition:all .2s;touch-action:manipulation}
-.tab.on{background:#a78bfa22;color:#a78bfa}
-.tab:hover:not(.on){background:var(--hover);color:var(--text2)}
-.empty{text-align:center;padding:32px;color:var(--text3)}
-.empty .ic{font-size:2rem;margin-bottom:8px}
-/* Mobile */
-@media(max-width:640px){
-  .hdr{padding:12px 14px;padding-top:max(12px,env(safe-area-inset-top))}
-  .hdr h1{font-size:1.05rem}
-  .wrap{padding:10px;padding-bottom:max(80px,env(safe-area-inset-bottom))}
-  .sg{grid-template-columns:1fr 1fr;gap:9px}
-  .mg{grid-template-columns:1fr 1fr}
-  .card{padding:13px 14px}
-  .cv{font-size:1.1rem}
-  .sec{padding:14px;margin-bottom:13px}
-  .fg{grid-template-columns:1fr 1fr;gap:9px}
-  .btn{padding:10px 16px;font-size:.83rem;width:100%;justify-content:center}
-  .tabrow{display:grid;grid-template-columns:1fr 1fr 1fr}
-  .tab{text-align:center}
-  .pgrid{grid-template-columns:1fr 1fr}
-  table{font-size:.76rem}
-  th,td{padding:8px}
+.tabrow{display:flex;gap:3px;margin-bottom:13px;}
+.tab{padding:7px 0;border-radius:7px;border:none;cursor:pointer;font-size:.76rem;font-weight:500;background:transparent;color:var(--text3);transition:all .2s;touch-action:manipulation;font-family:inherit;flex:1;text-align:center;}
+.tab.on{background:rgba(167,139,250,.12);color:var(--purple);font-weight:600;}
+
+/* Table */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:.78rem;}
+th{text-align:left;padding:7px 9px;color:var(--text3);font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:9px;border-bottom:1px solid var(--border2);white-space:nowrap;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.badge{background:rgba(167,139,250,.12);color:var(--purple);padding:2px 8px;border-radius:20px;font-weight:700;font-size:.72rem;}
+
+/* Record list */
+.rlist{display:flex;flex-direction:column;gap:7px;}
+.ri{display:flex;align-items:center;gap:9px;background:var(--txbg);border:1px solid var(--border2);border-radius:9px;padding:10px 12px;}
+.ri-ic{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.ic-dep{background:rgba(251,191,36,.1);}
+.ic-fx{background:rgba(45,212,191,.1);}
+.ic-buy{background:rgba(52,211,153,.1);}
+.ic-sell{background:rgba(248,113,113,.1);}
+.ri-body{flex:1;min-width:0;}
+.ri-nm{font-size:.8rem;font-weight:600;}
+.ri-dt{font-size:.68rem;color:var(--text3);margin-top:1px;}
+.ri-r{text-align:right;flex-shrink:0;}
+.ri-amt{font-size:.85rem;font-weight:700;}
+.ri-date{font-size:.65rem;color:var(--text3);margin-top:2px;}
+.ri-del{margin-top:4px;}
+
+/* Price grid */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.pi{background:var(--txbg);border:1px solid var(--border2);border-radius:8px;padding:9px 10px;}
+.pi-tk{color:var(--purple);font-weight:700;font-size:.78rem;margin-bottom:5px;}
+.pi input{background:var(--inp);border:1px solid var(--border);border-radius:5px;padding:6px 8px;color:var(--text);font-size:.8rem;outline:none;width:100%;font-family:inherit;}
+.pi input:focus{border-color:var(--purple);}
+
+.empty{text-align:center;padding:26px;color:var(--text3);font-size:.78rem;}
+.empty-ic{font-size:1.6rem;margin-bottom:6px;}
+.green{color:var(--green);}.red{color:var(--red);}.purple{color:var(--purple);}.blue{color:var(--blue);}.amber{color:var(--amber);}.teal{color:var(--teal);}
+
+@media(max-width:600px){
+  .hdr{padding:11px 14px;padding-top:max(11px,env(safe-area-inset-top));}
+  .ratebar{padding:6px 14px;}
+  .wrap{padding:10px;padding-bottom:max(80px,env(safe-area-inset-bottom));}
+  .hero{padding:16px;}
+  .hero-val{font-size:1.7rem;}
+  .sg{grid-template-columns:1fr 1fr;gap:8px;}
+  .sec{padding:13px;margin-bottom:10px;}
+  .fg{grid-template-columns:1fr 1fr;gap:8px;}
+  .frow .btn{flex:1;justify-content:center;}
+  .pgrid{grid-template-columns:1fr 1fr;}
+  table{font-size:.72rem;}
+  th,td{padding:6px 7px;}
 }
 </style>
 </head>
@@ -131,8 +157,8 @@ tr:hover td{background:var(--hover)}
 
 <div class="hdr">
   <div>
-    <h1>📈 <span id="ht">投资追踪器</span></h1>
-    <p>Moomoo · USD / MYR</p>
+    <h1>▲ <span id="ht">Moomoo Tracker</span></h1>
+    <p>USD · MYR · Portfolio</p>
   </div>
   <div class="hctl">
     <div class="tgrp" id="ltg">
@@ -145,227 +171,228 @@ tr:hover td{background:var(--hover)}
   </div>
 </div>
 
+<div class="ratebar">
+  <label id="ratelbl">USD/MYR：</label>
+  <input id="myrRate" type="number" value="4.70" step="0.01" min="0" inputmode="decimal" oninput="saveRate();render()">
+  <span id="ratehint" style="font-size:.68rem;">输入今日汇率</span>
+</div>
+
 <div class="wrap">
 
-  <!-- USD Summary -->
-  <div class="sg">
-    <div class="card"><div class="cl" id="l1">总存款</div><div class="cv amber" id="sD">$0.00</div><div class="cs">USD · Cash In</div></div>
-    <div class="card"><div class="cl" id="l2">已投本金</div><div class="cv purple" id="sP">$0.00</div><div class="cs" id="l2s">买股+手续费</div></div>
-    <div class="card"><div class="cl" id="l3">剩余现金</div><div class="cv blue" id="sC">$0.00</div><div class="cs" id="l3s">存款-已投</div></div>
-    <div class="card"><div class="cl" id="l4">当前市值</div><div class="cv blue" id="sV">$0.00</div><div class="cs">USD</div></div>
-    <div class="card"><div class="cl" id="l5">总盈亏</div><div class="cv" id="sPnl">$0.00</div><div class="cs" id="sPct">0.00%</div></div>
-    <div class="card"><div class="cl" id="l6">手续费</div><div class="cv red" id="sF">$0.00</div><div class="cs">USD</div></div>
+  <!-- Account Value -->
+  <div class="hero">
+    <div class="hero-lbl" id="av-lbl">ACCOUNT VALUE</div>
+    <div class="hero-val" id="av-val">RM 0.00</div>
+    <div class="hero-sub" id="av-sub">剩余MYR + (市值 + 剩余USD) × 汇率</div>
+    <div class="pnl-badge" id="av-pnl">PnL +$0.00 / +RM 0.00 (0.00%)</div>
   </div>
 
-  <!-- MYR -->
-  <div class="mbox">
-    <div class="mtitle">🇲🇾 <span id="mt">马币影响 (MYR Impact)</span></div>
-    <div class="mrate">
-      <label id="mrl">USD/MYR 汇率：</label>
-      <input id="myrRate" type="number" value="4.7" step="0.01" min="0" inputmode="decimal" oninput="saveMyr();render()">
-      <span style="font-size:.75rem;color:var(--text3)" id="mrh">手动输入今日汇率</span>
-    </div>
-    <div class="mg">
-      <div class="mc"><div class="mcl" id="md1">存款 (MYR)</div><div class="mcv amber" id="mD">RM 0.00</div><div class="mcs" id="md1s">总共出了多少马币</div></div>
-      <div class="mc"><div class="mcl" id="md2">市值 (MYR)</div><div class="mcv blue" id="mV">RM 0.00</div><div class="mcs" id="md2s">现在值多少马币</div></div>
-      <div class="mc"><div class="mcl" id="md3">净盈亏 (MYR)</div><div class="mcv" id="mPnl">RM 0.00</div><div class="mcs" id="mPct">0.00%</div></div>
-      <div class="mc"><div class="mcl" id="md4">剩余现金 (MYR)</div><div class="mcv teal" id="mC">RM 0.00</div><div class="mcs" id="md4s">未投入余额</div></div>
-    </div>
+  <!-- Summary Cards -->
+  <div class="sg">
+    <div class="card cm"><div class="cl" id="c1l">总存款</div><div class="cv amber" id="c1v">RM 0.00</div><div class="cs" id="c1s">MYR deposited</div></div>
+    <div class="card cm"><div class="cl" id="c2l">剩余 MYR</div><div class="cv teal" id="c2v">RM 0.00</div><div class="cs" id="c2s">存款 - 已换汇</div></div>
+    <div class="card cu"><div class="cl" id="c3l">总换汇</div><div class="cv blue" id="c3v">$0.00</div><div class="cs" id="c3s">MYR → USD</div></div>
+    <div class="card cu"><div class="cl" id="c4l">剩余 USD</div><div class="cv blue" id="c4v">$0.00</div><div class="cs" id="c4s">换汇 - 已投</div></div>
+    <div class="card cu"><div class="cl" id="c5l">已投本金</div><div class="cv purple" id="c5v">$0.00</div><div class="cs" id="c5s">买股 + 手续费</div></div>
+    <div class="card cu"><div class="cl" id="c6l">当前市值</div><div class="cv blue" id="c6v">$0.00</div><div class="cs">USD</div></div>
+    <div class="card cp"><div class="cl" id="c7l">Total PnL</div><div class="cv" id="c7v">$0.00</div><div class="cs" id="c7s">≈ RM 0.00</div></div>
+    <div class="card"><div class="cl" id="c8l">手续费</div><div class="cv red" id="c8v">$0.00</div><div class="cs">USD</div></div>
   </div>
 
   <!-- Deposit -->
+  <div class="section-group-label" id="sg-input">记录输入</div>
   <div class="sec">
-    <div class="stitle" id="sd">🏦 记录存款 (Moomoo Deposit)</div>
+    <div class="stitle"><div class="sicon si-d">🏦</div><span id="sd-title">记录存款 (MYR)</span></div>
     <div class="fg">
-      <div class="fi"><label id="da">存款金额 (USD)</label><input id="depAmt" type="number" placeholder="1000.00" min="0" step="any" inputmode="decimal"></div>
+      <div class="fi"><label id="da">金额 (MYR)</label><input id="depAmt" type="number" placeholder="5000.00" min="0" step="any" inputmode="decimal"></div>
       <div class="fi"><label id="dd">日期</label><input id="depDate" type="date"></div>
-      <div class="fi"><label id="dn">备注 (可选)</label><input id="depNote" type="text" placeholder="如：银行转账" autocomplete="off"></div>
+      <div class="fi"><label id="dn">备注</label><input id="depNote" type="text" placeholder="如：Maybank" autocomplete="off"></div>
     </div>
-    <div style="margin-top:12px"><button class="btn bt" onclick="addDep()">💰 <span id="bdep">记录存款</span></button></div>
+    <div class="frow"><button class="btn bt" onclick="addDep()">+ <span id="bdep">记录存款</span></button></div>
+  </div>
+
+  <!-- Convert -->
+  <div class="sec">
+    <div class="stitle"><div class="sicon si-f">💱</div><span id="fx-title">换汇记录 (MYR → USD)</span></div>
+    <div class="fg">
+      <div class="fi"><label id="fxa">换出 MYR</label><input id="fxMyr" type="number" placeholder="4700.00" min="0" step="any" inputmode="decimal"></div>
+      <div class="fi"><label id="fxb">拿到 USD</label><input id="fxUsd" type="number" placeholder="1000.00" min="0" step="any" inputmode="decimal"></div>
+      <div class="fi"><label id="fxd">日期</label><input id="fxDate" type="date"></div>
+      <div class="fi"><label id="fxn">备注</label><input id="fxNote" type="text" placeholder="可选" autocomplete="off"></div>
+    </div>
+    <div class="frow"><button class="btn bfx" onclick="addFx()">+ <span id="bfx">记录换汇</span></button></div>
   </div>
 
   <!-- Trade -->
   <div class="sec">
-    <div class="stitle" id="str">📊 添加交易</div>
+    <div class="stitle"><div class="sicon si-t">📈</div><span id="tx-title">添加交易 (USD)</span></div>
     <div class="fg">
-      <div class="fi"><label id="ft">类型</label><select id="txType"><option value="buy" id="obuy">买入 BUY</option><option value="sell" id="osell">卖出 SELL</option></select></div>
+      <div class="fi"><label id="ftype">类型</label>
+        <select id="txType"><option value="buy" id="obuy">买入 BUY</option><option value="sell" id="osell">卖出 SELL</option></select>
+      </div>
       <div class="fi"><label id="ftk">股票代码</label><input id="txTk" type="text" placeholder="AAPL" style="text-transform:uppercase" autocomplete="off" spellcheck="false"></div>
       <div class="fi"><label id="fsh">股数</label><input id="txSh" type="number" placeholder="10" min="0" step="any" inputmode="decimal"></div>
       <div class="fi"><label id="fpr">价格/股 (USD)</label><input id="txPr" type="number" placeholder="150.00" min="0" step="any" inputmode="decimal"></div>
-      <div class="fi"><label id="ffe">平台费 (USD)</label><input id="txFe" type="number" placeholder="0.00" min="0" step="any" value="0" inputmode="decimal"></div>
+      <div class="fi"><label id="ffe">手续费 (USD)</label><input id="txFe" type="number" placeholder="0.00" min="0" step="any" value="0" inputmode="decimal"></div>
       <div class="fi"><label id="fdt">日期</label><input id="txDate" type="date"></div>
     </div>
-    <div style="margin-top:12px"><button class="btn bp" onclick="addTx()">➕ <span id="btrd">记录交易</span></button></div>
+    <div class="frow"><button class="btn bp" onclick="addTx()">+ <span id="btrd">记录交易</span></button></div>
   </div>
 
   <!-- Tabs -->
   <div class="sec">
     <div class="tabrow">
-      <button class="tab on" id="tbh" onclick="sw('holdings',this)">持仓概览</button>
+      <button class="tab on" id="tbh" onclick="sw('holdings',this)">持仓</button>
       <button class="tab" id="tbp" onclick="sw('prices',this)">更新价格</button>
-      <button class="tab" id="tbt" onclick="sw('transactions',this)">所有记录</button>
+      <button class="tab" id="tbt" onclick="sw('records',this)">所有记录</button>
     </div>
     <div id="tab-holdings">
       <div class="tw"><table><thead><tr>
         <th id="ths">股票</th><th id="thsh">股数</th><th id="thac">均价</th>
         <th id="thcp">现价</th><th id="thcb">本金</th><th id="thmv">市值</th>
-        <th id="thpn">盈亏</th><th id="thrt">回报率</th>
+        <th id="thpn">PnL</th><th id="thrt">回报%</th>
       </tr></thead><tbody id="hBody"></tbody></table></div>
     </div>
     <div id="tab-prices" style="display:none">
-      <p id="ph" style="font-size:.79rem;color:var(--text3);margin-bottom:12px">输入各股票最新价格来刷新盈亏</p>
+      <p id="ph" style="font-size:.72rem;color:var(--text3);margin-bottom:11px">输入最新股价刷新盈亏</p>
       <div class="pgrid" id="pGrid"></div>
-      <div style="margin-top:12px"><button class="btn bp" onclick="updPrices()">✅ <span id="bupd">更新价格</span></button></div>
+      <div class="frow"><button class="btn bp" onclick="updPrices()">✓ <span id="bupd">更新价格</span></button></div>
     </div>
-    <div id="tab-transactions" style="display:none"><div class="txlist" id="txList"></div></div>
+    <div id="tab-records" style="display:none"><div class="rlist" id="rList"></div></div>
   </div>
 
 </div>
 
 <script>
-// ── State ──
-var lang  = localStorage.getItem('inv_lang')  || 'zh';
-var theme = localStorage.getItem('inv_theme') || 'dark';
-var txs   = JSON.parse(localStorage.getItem('inv_txs')  || '[]');
-var deps  = JSON.parse(localStorage.getItem('inv_deps') || '[]');
-var prc   = JSON.parse(localStorage.getItem('inv_prc')  || '{}');
-var myr   = parseFloat(localStorage.getItem('inv_myr')  || '4.7');
+var lang  = localStorage.getItem('mm_lang')  || 'zh';
+var theme = localStorage.getItem('mm_theme') || 'dark';
+var deps  = JSON.parse(localStorage.getItem('mm_deps') || '[]');
+var fxs   = JSON.parse(localStorage.getItem('mm_fxs')  || '[]');
+var txs   = JSON.parse(localStorage.getItem('mm_txs')  || '[]');
+var prc   = JSON.parse(localStorage.getItem('mm_prc')  || '{}');
+var rate  = parseFloat(localStorage.getItem('mm_rate') || '4.70');
 
 document.getElementById('txDate').valueAsDate  = new Date();
 document.getElementById('depDate').valueAsDate = new Date();
-document.getElementById('myrRate').value = myr;
+document.getElementById('fxDate').valueAsDate  = new Date();
+document.getElementById('myrRate').value = rate;
 
-// ── Theme — runs immediately, no dependencies ──
-function applyTheme() {
-  var isLight = (theme === 'light');
-  document.body.classList.toggle('light', isLight);
-  document.getElementById('thbtn').textContent = isLight ? '🌙' : '☀️';
-  document.getElementById('thbtn').classList.toggle('on', true);
-  document.getElementById('tcmeta').content = isLight ? '#7c3aed' : '#141428';
+function applyTheme(){
+  var l=theme==='light';
+  document.body.classList.toggle('light',l);
+  document.getElementById('thbtn').textContent=l?'🌙':'☀️';
+  document.getElementById('tcmeta').content=l?'#7c3aed':'#0f0f13';
 }
 applyTheme();
+function toggleTheme(){theme=theme==='dark'?'light':'dark';localStorage.setItem('mm_theme',theme);applyTheme();}
 
-function toggleTheme() {
-  theme = (theme === 'dark') ? 'light' : 'dark';
-  localStorage.setItem('inv_theme', theme);
-  applyTheme();
-}
-
-// ── i18n ──
-var I = {
-  'ht':  ['投资追踪器','Investment Tracker'],
-  'l1':  ['总存款','Total Deposited'],
-  'l2':  ['已投本金','Invested'],
-  'l2s': ['买股+手续费','Stocks + fees'],
-  'l3':  ['剩余现金','Cash Left'],
-  'l3s': ['存款-已投','Deposited - Invested'],
-  'l4':  ['当前市值','Market Value'],
-  'l5':  ['总盈亏','Total PnL'],
-  'l6':  ['手续费','Fees'],
-  'mt':  ['马币影响 (MYR Impact)','MYR Impact'],
-  'mrl': ['USD/MYR 汇率：','USD/MYR Rate:'],
-  'mrh': ['手动输入今日汇率',"Enter today's rate"],
-  'md1': ['存款 (MYR)','Deposited (MYR)'],
-  'md1s':['总共出了多少马币','Total MYR put in'],
-  'md2': ['市值 (MYR)','Market Value (MYR)'],
-  'md2s':['现在值多少马币','Current value in MYR'],
-  'md3': ['净盈亏 (MYR)','Net PnL (MYR)'],
-  'md4': ['剩余现金 (MYR)','Cash Remaining (MYR)'],
-  'md4s':['未投入余额','Uninvested balance'],
-  'sd':  ['🏦 记录存款 (Moomoo Deposit)','🏦 Record Deposit (Moomoo)'],
-  'da':  ['存款金额 (USD)','Amount (USD)'],
-  'dd':  ['日期','Date'],
-  'dn':  ['备注 (可选)','Note (optional)'],
+var I={
+  'ht':['Portfolio 追踪器','Portfolio Tracker'],
+  'av-lbl':['账户总值','ACCOUNT VALUE'],
+  'av-sub':['剩余MYR + (市值 + 剩余USD) × 汇率','Cash MYR + (Market Value + Cash USD) × Rate'],
+  'ratelbl':['USD/MYR：','USD/MYR:'],'ratehint':['输入今日汇率',"Today's rate"],
+  'c1l':['总存款','Total Deposited'],'c1s':['MYR 存入','MYR deposited'],
+  'c2l':['剩余 MYR','Cash MYR'],'c2s':['存款 - 已换汇','Deposited - Converted'],
+  'c3l':['总换汇','Total Converted'],'c3s':['MYR → USD','MYR → USD'],
+  'c4l':['剩余 USD','Cash USD'],'c4s':['换汇 - 已投','Converted - Invested'],
+  'c5l':['已投本金','Invested'],'c5s':['买股 + 手续费','Stocks + fees'],
+  'c6l':['当前市值','Market Value'],
+  'c7l':['Total PnL','Total PnL'],
+  'c8l':['手续费','Platform Fees'],
+  'sg-input':['记录输入','Record Input'],
+  'sd-title':['记录存款 (MYR)','Record Deposit (MYR)'],
+  'da':['金额 (MYR)','Amount (MYR)'],'dd':['日期','Date'],'dn':['备注','Note'],
   'bdep':['记录存款','Add Deposit'],
-  'str': ['📊 添加交易','📊 Add Trade'],
-  'ft':  ['类型','Type'],
-  'obuy':['买入 BUY','BUY'],
-  'osell':['卖出 SELL','SELL'],
-  'ftk': ['股票代码','Ticker'],
-  'fsh': ['股数','Shares'],
-  'fpr': ['价格/股 (USD)','Price/share (USD)'],
-  'ffe': ['平台费 (USD)','Platform Fee (USD)'],
-  'fdt': ['日期','Date'],
+  'fx-title':['换汇记录 (MYR → USD)','Currency Exchange (MYR → USD)'],
+  'fxa':['换出 MYR','MYR Spent'],'fxb':['拿到 USD','USD Received'],'fxd':['日期','Date'],'fxn':['备注','Note'],
+  'bfx':['记录换汇','Add Exchange'],
+  'tx-title':['添加交易 (USD)','Add Trade (USD)'],
+  'ftype':['类型','Type'],'obuy':['买入 BUY','BUY'],'osell':['卖出 SELL','SELL'],
+  'ftk':['股票代码','Ticker'],'fsh':['股数','Shares'],'fpr':['价格/股 (USD)','Price/share (USD)'],
+  'ffe':['手续费 (USD)','Fee (USD)'],'fdt':['日期','Date'],
   'btrd':['记录交易','Add Trade'],
-  'tbh': ['持仓概览','Holdings'],
-  'tbp': ['更新价格','Update Prices'],
-  'tbt': ['所有记录','All Records'],
-  'ph':  ['输入各股票最新价格来刷新盈亏','Enter latest prices to refresh PnL'],
+  'tbh':['持仓','Holdings'],'tbp':['更新价格','Update Prices'],'tbt':['所有记录','All Records'],
+  'ph':['输入最新股价刷新盈亏','Enter latest prices to refresh PnL'],
   'bupd':['更新价格','Update Prices'],
-  'ths': ['股票','Stock'],'thsh':['股数','Shares'],'thac':['均价','Avg Cost'],
+  'ths':['股票','Stock'],'thsh':['股数','Shares'],'thac':['均价','Avg Cost'],
   'thcp':['现价','Price'],'thcb':['本金','Cost'],'thmv':['市值','Value'],
-  'thpn':['盈亏','PnL'],'thrt':['回报率','Return']
+  'thpn':['PnL','PnL'],'thrt':['回报%','Return%'],
 };
+function applyLang(){
+  var i=lang==='zh'?0:1;
+  for(var id in I){var el=document.getElementById(id);if(el)el.textContent=I[id][i];}
+  document.getElementById('depNote').placeholder=lang==='zh'?'如：Maybank':'e.g. bank transfer';
+  document.getElementById('fxNote').placeholder=lang==='zh'?'可选':'optional';
+}
+function setLang(l,btn){
+  lang=l;localStorage.setItem('mm_lang',l);
+  document.querySelectorAll('#ltg .tbtn').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');applyLang();render();
+}
+if(lang==='en'){var lb=document.querySelectorAll('#ltg .tbtn');lb[0].classList.remove('on');lb[1].classList.add('on');}
 
-function applyLang() {
-  var i = lang==='zh' ? 0 : 1;
-  for (var id in I) { var el=document.getElementById(id); if(el) el.textContent=I[id][i]; }
-  document.getElementById('depNote').placeholder = lang==='zh' ? '如：银行转账' : 'e.g. bank transfer';
+function saveRate(){rate=parseFloat(document.getElementById('myrRate').value)||4.7;localStorage.setItem('mm_rate',rate);}
+function t(zh,en){return lang==='zh'?zh:en;}
+function fu(n){return '$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fm(n){return 'RM '+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function sgn(n){return n>=0?'+':'-';}
+
+function save(){
+  localStorage.setItem('mm_deps',JSON.stringify(deps));
+  localStorage.setItem('mm_fxs',JSON.stringify(fxs));
+  localStorage.setItem('mm_txs',JSON.stringify(txs));
+  localStorage.setItem('mm_prc',JSON.stringify(prc));
 }
 
-function setLang(l, btn) {
-  lang = l; localStorage.setItem('inv_lang', l);
-  document.querySelectorAll('#ltg .tbtn').forEach(function(b){ b.classList.remove('on'); });
-  btn.classList.add('on');
-  applyLang(); render();
-}
-
-function saveMyr() { myr = parseFloat(document.getElementById('myrRate').value)||4.7; localStorage.setItem('inv_myr', myr); }
-function t(zh,en){ return lang==='zh'?zh:en; }
-function fu(n){ return '$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function fm(n){ return 'RM '+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-
-function save() {
-  localStorage.setItem('inv_txs',  JSON.stringify(txs));
-  localStorage.setItem('inv_deps', JSON.stringify(deps));
-  localStorage.setItem('inv_prc',  JSON.stringify(prc));
-}
-
-// ── Deposit ──
-function addDep() {
-  var amt  = parseFloat(document.getElementById('depAmt').value);
-  var date = document.getElementById('depDate').value;
-  var note = document.getElementById('depNote').value.trim();
-  if (isNaN(amt)||amt<=0||!date) { alert(t('请填写存款金额和日期！','Please enter amount and date!')); return; }
+function addDep(){
+  var amt=parseFloat(document.getElementById('depAmt').value);
+  var date=document.getElementById('depDate').value;
+  var note=document.getElementById('depNote').value.trim();
+  if(isNaN(amt)||amt<=0||!date){alert(t('请填写存款金额和日期！','Please enter amount and date!'));return;}
   deps.unshift({id:Date.now(),amount:amt,date:date,note:note});
-  save(); render();
-  document.getElementById('depAmt').value='';
-  document.getElementById('depNote').value='';
+  save();render();
+  document.getElementById('depAmt').value='';document.getElementById('depNote').value='';
 }
-function delDep(id){ deps=deps.filter(function(d){return d.id!==id;}); save(); render(); }
+function delDep(id){deps=deps.filter(function(d){return d.id!==id;});save();render();}
 
-// ── Trade ──
-function addTx() {
-  var type = document.getElementById('txType').value;
-  var tk   = document.getElementById('txTk').value.trim().toUpperCase();
-  var sh   = parseFloat(document.getElementById('txSh').value);
-  var pr   = parseFloat(document.getElementById('txPr').value);
-  var fe   = parseFloat(document.getElementById('txFe').value)||0;
-  var date = document.getElementById('txDate').value;
-  if (!tk||isNaN(sh)||isNaN(pr)||!date) { alert(t('请填写股票代码、股数、价格和日期！','Please fill ticker, shares, price and date!')); return; }
+function addFx(){
+  var myr=parseFloat(document.getElementById('fxMyr').value);
+  var usd=parseFloat(document.getElementById('fxUsd').value);
+  var date=document.getElementById('fxDate').value;
+  var note=document.getElementById('fxNote').value.trim();
+  if(isNaN(myr)||myr<=0||isNaN(usd)||usd<=0||!date){alert(t('请填写换汇金额和日期！','Please enter exchange amounts and date!'));return;}
+  fxs.unshift({id:Date.now(),myr:myr,usd:usd,date:date,note:note});
+  save();render();
+  document.getElementById('fxMyr').value='';document.getElementById('fxUsd').value='';document.getElementById('fxNote').value='';
+}
+function delFx(id){fxs=fxs.filter(function(f){return f.id!==id;});save();render();}
+
+function addTx(){
+  var type=document.getElementById('txType').value;
+  var tk=document.getElementById('txTk').value.trim().toUpperCase();
+  var sh=parseFloat(document.getElementById('txSh').value);
+  var pr=parseFloat(document.getElementById('txPr').value);
+  var fe=parseFloat(document.getElementById('txFe').value)||0;
+  var date=document.getElementById('txDate').value;
+  if(!tk||isNaN(sh)||isNaN(pr)||!date){alert(t('请填写完整交易信息！','Please fill all trade details!'));return;}
   txs.unshift({id:Date.now(),type:type,ticker:tk,shares:sh,price:pr,fee:fe,date:date});
-  if (!prc[tk]) prc[tk]=pr;
-  save(); render();
-  document.getElementById('txTk').value='';
-  document.getElementById('txSh').value='';
-  document.getElementById('txPr').value='';
-  document.getElementById('txFe').value='0';
+  if(!prc[tk])prc[tk]=pr;
+  save();render();
+  document.getElementById('txTk').value='';document.getElementById('txSh').value='';
+  document.getElementById('txPr').value='';document.getElementById('txFe').value='0';
 }
-function delTx(id){ txs=txs.filter(function(x){return x.id!==id;}); save(); render(); }
+function delTx(id){txs=txs.filter(function(x){return x.id!==id;});save();render();}
 
-function updPrices() {
+function updPrices(){
   document.querySelectorAll('.pinput').forEach(function(inp){
-    var v=parseFloat(inp.value);
-    if(!isNaN(v)&&v>0) prc[inp.dataset.ticker]=v;
-  });
-  save(); render();
+    var v=parseFloat(inp.value);if(!isNaN(v)&&v>0)prc[inp.dataset.ticker]=v;
+  });save();render();
 }
 
-// ── Holdings calc ──
-function getHoldings() {
+function getHoldings(){
   var h={};
   txs.slice().sort(function(a,b){return new Date(a.date)-new Date(b.date);}).forEach(function(tx){
-    if(!h[tx.ticker]) h[tx.ticker]={ticker:tx.ticker,shares:0,cost:0,fees:0};
+    if(!h[tx.ticker])h[tx.ticker]={ticker:tx.ticker,shares:0,cost:0,fees:0};
     var e=h[tx.ticker];
     if(tx.type==='buy'){e.cost+=tx.shares*tx.price;e.fees+=tx.fee;e.shares+=tx.shares;}
     else{var avg=e.shares>0?e.cost/e.shares:0;e.cost-=avg*tx.shares;e.fees+=tx.fee;e.shares-=tx.shares;if(e.shares<0.0001)e.shares=0;}
@@ -373,107 +400,113 @@ function getHoldings() {
   return Object.values(h).filter(function(e){return e.shares>0.0001;});
 }
 
-// ── Render ──
-function render() {
+function render(){
   applyLang();
-  var holdings = getHoldings();
-  var rate = parseFloat(document.getElementById('myrRate').value)||myr;
-  var totDep=deps.reduce(function(s,d){return s+d.amount;},0);
+  var r=parseFloat(document.getElementById('myrRate').value)||rate;
+  var holdings=getHoldings();
+
+  var totDepMYR=deps.reduce(function(s,d){return s+d.amount;},0);
+  var totFxMYR=fxs.reduce(function(s,f){return s+f.myr;},0);
+  var totFxUSD=fxs.reduce(function(s,f){return s+f.usd;},0);
+  var cashMYR=totDepMYR-totFxMYR;
+
   var totInv=0,totVal=0,totFee=0;
   holdings.forEach(function(h){
     var cp=prc[h.ticker]||(h.cost/(h.shares||1));
-    totInv+=h.cost+h.fees; totVal+=h.shares*cp; totFee+=h.fees;
+    totInv+=h.cost+h.fees;totVal+=h.shares*cp;totFee+=h.fees;
   });
-  var cash=totDep-totInv, pnl=totVal-totInv;
+  var cashUSD=totFxUSD-totInv;
+  var pnl=totVal-totInv;
   var pct=totInv>0?(pnl/totInv*100):0;
+  var accVal=cashMYR+(totVal+cashUSD)*r;
+  var pnlMYR=pnl*r;
 
-  // USD cards
-  document.getElementById('sD').textContent=fu(totDep);
-  document.getElementById('sP').textContent=fu(totInv);
-  var cEl=document.getElementById('sC'); cEl.textContent=fu(cash); cEl.className='cv '+(cash>=0?'blue':'red');
-  document.getElementById('sV').textContent=fu(totVal);
-  document.getElementById('sF').textContent=fu(totFee);
-  var pEl=document.getElementById('sPnl'); pEl.textContent=(pnl>=0?'+':'-')+fu(pnl); pEl.className='cv '+(pnl>=0?'green':'red');
-  var pcEl=document.getElementById('sPct'); pcEl.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%'; pcEl.className='cs '+(pct>=0?'green':'red');
+  // Hero
+  document.getElementById('av-val').textContent=fm(accVal);
+  var pb=document.getElementById('av-pnl');
+  pb.textContent='PnL '+sgn(pnl)+fu(pnl)+' / '+sgn(pnlMYR)+fm(pnlMYR)+' ('+(pct>=0?'+':'')+pct.toFixed(2)+'%)';
+  pb.className='pnl-badge'+(pnl<0?' loss':'');
 
-  // MYR cards
-  document.getElementById('mD').textContent=fm(totDep*rate);
-  document.getElementById('mV').textContent=fm(totVal*rate);
-  var mpEl=document.getElementById('mPnl'); mpEl.textContent=(pnl>=0?'+':'-')+fm(Math.abs(pnl*rate)); mpEl.className='mcv '+(pnl>=0?'green':'red');
-  var mpcEl=document.getElementById('mPct'); mpcEl.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%'; mpcEl.className='mcs '+(pct>=0?'green':'red');
-  var mcEl=document.getElementById('mC'); mcEl.textContent=fm(Math.abs(cash*rate)); mcEl.className='mcv '+(cash>=0?'teal':'red');
+  // Cards
+  document.getElementById('c1v').textContent=fm(totDepMYR);
+  var c2=document.getElementById('c2v');c2.textContent=fm(cashMYR);c2.className='cv '+(cashMYR>=0?'teal':'red');
+  document.getElementById('c3v').textContent=fu(totFxUSD);
+  var c4=document.getElementById('c4v');c4.textContent=fu(cashUSD);c4.className='cv '+(cashUSD>=0?'blue':'red');
+  document.getElementById('c5v').textContent=fu(totInv);
+  document.getElementById('c6v').textContent=fu(totVal);
+  var c7=document.getElementById('c7v');c7.textContent=sgn(pnl)+fu(pnl);c7.className='cv '+(pnl>=0?'green':'red');
+  document.getElementById('c7s').textContent='≈ '+sgn(pnlMYR)+fm(pnlMYR)+' ('+(pct>=0?'+':'')+pct.toFixed(2)+'%)';
+  document.getElementById('c8v').textContent=fu(totFee);
 
-  // Holdings table
+  // Holdings
   var tb=document.getElementById('hBody');
   if(!holdings.length){
-    tb.innerHTML='<tr><td colspan="8"><div class="empty"><div class="ic">📊</div>'+t('还没有持仓，添加第一笔交易吧！','No holdings yet. Add your first trade!')+'</div></td></tr>';
+    tb.innerHTML='<tr><td colspan="8"><div class="empty"><div class="empty-ic">📊</div>'+t('还没有持仓，添加第一笔交易吧！','No holdings yet. Add your first trade!')+'</div></td></tr>';
   } else {
     tb.innerHTML=holdings.map(function(h){
       var avg=h.shares>0?h.cost/h.shares:0;
       var cp=prc[h.ticker]||avg;
       var base=h.cost+h.fees,val=h.shares*cp,p=val-base,pc=base>0?(p/base*100):0;
-      return '<tr><td><span class="badge">'+h.ticker+'</span></td><td>'+(+h.shares.toFixed(4))+'</td><td>$'+avg.toFixed(2)+'</td><td>$'+cp.toFixed(2)+'</td><td>'+fu(base)+'</td><td>'+fu(val)+'</td><td class="'+(p>=0?'green':'red')+'">'+(p>=0?'+':'-')+fu(p)+'</td><td class="'+(pc>=0?'green':'red')+'">'+(pc>=0?'+':'')+pc.toFixed(2)+'%</td></tr>';
+      return '<tr><td><span class="badge">'+h.ticker+'</span></td><td>'+(+h.shares.toFixed(4))+'</td><td>$'+avg.toFixed(2)+'</td><td>$'+cp.toFixed(2)+'</td><td>'+fu(base)+'</td><td>'+fu(val)+'</td><td class="'+(p>=0?'green':'red')+'">'+sgn(p)+fu(p)+'</td><td class="'+(pc>=0?'green':'red')+'">'+(pc>=0?'+':'')+pc.toFixed(2)+'%</td></tr>';
     }).join('');
   }
 
-  // Price grid
+  // Prices
   var tickers=[...new Set(holdings.map(function(h){return h.ticker;}))];
   var pg=document.getElementById('pGrid');
   if(!tickers.length){
-    pg.innerHTML='<div class="empty"><div class="ic">💰</div>'+t('添加交易后在这里更新股价','Add trades, then update prices here')+'</div>';
+    pg.innerHTML='<div class="empty"><div class="empty-ic">💰</div>'+t('添加交易后更新股价','Add trades, then update prices')+'</div>';
   } else {
     pg.innerHTML=tickers.map(function(tk){
-      return '<div class="pi"><div class="ptk">'+tk+'</div><input class="pinput" data-ticker="'+tk+'" type="number" step="any" min="0" inputmode="decimal" value="'+(prc[tk]||'')+'" placeholder="'+t('最新价格','Latest price')+'"></div>';
+      return '<div class="pi"><div class="pi-tk">'+tk+'</div><input class="pinput" data-ticker="'+tk+'" type="number" step="any" min="0" inputmode="decimal" value="'+(prc[tk]||'')+'" placeholder="'+t('最新价格','Latest price')+'"></div>';
     }).join('');
   }
 
   // All records
-  var all=deps.map(function(d){return Object.assign({},d,{rt:'dep'});})
-    .concat(txs.map(function(x){return Object.assign({},x,{rt:'tx'});}))
-    .sort(function(a,b){return new Date(b.date)-new Date(a.date)||b.id-a.id;});
-  var tl=document.getElementById('txList');
+  var all=[];
+  deps.forEach(function(d){all.push({id:d.id,rt:'dep',date:d.date,d:d});});
+  fxs.forEach(function(f){all.push({id:f.id,rt:'fx',date:f.date,d:f});});
+  txs.forEach(function(x){all.push({id:x.id,rt:'tx',date:x.date,d:x});});
+  all.sort(function(a,b){return new Date(b.date)-new Date(a.date)||b.id-a.id;});
+
+  var rl=document.getElementById('rList');
   if(!all.length){
-    tl.innerHTML='<div class="empty"><div class="ic">📋</div>'+t('暂无记录','No records yet')+'</div>';
+    rl.innerHTML='<div class="empty"><div class="empty-ic">📋</div>'+t('暂无记录','No records yet')+'</div>';
   } else {
-    tl.innerHTML=all.map(function(r){
-      if(r.rt==='dep'){
-        return '<div class="txi"><div class="txl"><div class="txic dep">🏦</div><div class="txin"><div class="nm">'+t('存款','Deposit')+(r.note?' · '+r.note:'')+'</div><div class="dt">Moomoo · '+fm(r.amount*rate)+'</div></div></div><div class="txr"><div class="am green">+'+fu(r.amount)+'</div><div class="da">'+r.date+'</div><div class="dl"><button class="btn bd" onclick="delDep('+r.id+')">'+t('删除','Del')+'</button></div></div></div>';
+    rl.innerHTML=all.map(function(item){
+      if(item.rt==='dep'){
+        var d=item.d;
+        return '<div class="ri"><div class="ri-ic ic-dep">🏦</div><div class="ri-body"><div class="ri-nm">'+t('存款','Deposit')+(d.note?' · '+d.note:'')+'</div><div class="ri-dt">Moomoo Deposit</div></div><div class="ri-r"><div class="ri-amt amber">+'+fm(d.amount)+'</div><div class="ri-date">'+d.date+'</div><div class="ri-del"><button class="btn bd" onclick="delDep('+d.id+')">'+t('删除','Del')+'</button></div></div></div>';
       }
-      var tot=r.shares*r.price+r.fee,buy=r.type==='buy';
-      return '<div class="txi"><div class="txl"><div class="txic '+r.type+'">'+(buy?'📈':'📉')+'</div><div class="txin"><div class="nm">'+(buy?t('买入','BUY'):t('卖出','SELL'))+' <strong>'+r.ticker+'</strong></div><div class="dt">'+r.shares+' '+t('股','sh')+' × $'+r.price.toFixed(2)+(r.fee>0?' +$'+r.fee.toFixed(2)+' fee':'')+'</div></div></div><div class="txr"><div class="am '+(buy?'red':'green')+'">'+(buy?'-':'+')+fu(tot)+'</div><div class="da">'+r.date+'</div><div class="dl"><button class="btn bd" onclick="delTx('+r.id+')">'+t('删除','Del')+'</button></div></div></div>';
+      if(item.rt==='fx'){
+        var f=item.d;
+        var fxr=(f.usd>0?(f.myr/f.usd):0).toFixed(3);
+        return '<div class="ri"><div class="ri-ic ic-fx">💱</div><div class="ri-body"><div class="ri-nm">'+t('换汇','Exchange')+(f.note?' · '+f.note:'')+'</div><div class="ri-dt">'+fm(f.myr)+' → '+fu(f.usd)+' @ '+fxr+'</div></div><div class="ri-r"><div class="ri-amt teal">+'+fu(f.usd)+'</div><div class="ri-date">'+f.date+'</div><div class="ri-del"><button class="btn bd" onclick="delFx('+f.id+')">'+t('删除','Del')+'</button></div></div></div>';
+      }
+      var x=item.d,buy=x.type==='buy',tot=x.shares*x.price+x.fee;
+      return '<div class="ri"><div class="ri-ic '+(buy?'ic-buy':'ic-sell')+'">'+(buy?'📈':'📉')+'</div><div class="ri-body"><div class="ri-nm">'+(buy?t('买入','BUY'):t('卖出','SELL'))+' <strong>'+x.ticker+'</strong></div><div class="ri-dt">'+x.shares+' '+t('股','sh')+' × $'+x.price.toFixed(2)+(x.fee>0?' + $'+x.fee.toFixed(2)+' fee':'')+'</div></div><div class="ri-r"><div class="ri-amt '+(buy?'red':'green')+'">'+(buy?'-':'+')+fu(tot)+'</div><div class="ri-date">'+x.date+'</div><div class="ri-del"><button class="btn bd" onclick="delTx('+x.id+')">'+t('删除','Del')+'</button></div></div></div>';
     }).join('');
   }
 }
 
 function sw(name,btn){
-  ['holdings','prices','transactions'].forEach(function(n){
-    document.getElementById('tab-'+n).style.display=n===name?'':'none';
-  });
-  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');
+  ['holdings','prices','records'].forEach(function(n){document.getElementById('tab-'+n).style.display=n===name?'':'none';});
+  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');
 }
 
-// Init lang buttons
-if(lang==='en'){
-  var lb=document.querySelectorAll('#ltg .tbtn');
-  lb[0].classList.remove('on'); lb[1].classList.add('on');
-}
-
-// PWA manifest
-var mf={name:'投资追踪器',short_name:'投资追踪',display:'standalone',background_color:'#141428',theme_color:'#141428',start_url:'.',icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141428'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334d399' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%2334d399' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolyline points='12,72 28,58 44,62 58,38 72,30 88,18' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='12,72 28,58 44,62 58,38 72,30 88,18 88,85 12,85' fill='url(%23g)'/%3E%3Ccircle cx='88' cy='18' r='5' fill='%2334d399'/%3E%3C/svg%3E",sizes:'512x512',type:'image/svg+xml'}]};
+// PWA
+var mf={name:'Portfolio Tracker',short_name:'Portfolio',display:'standalone',background_color:'#0a0a0f',theme_color:'#0a0a0f',start_url:'.',icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0f'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2334d399' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%2334d399' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolyline points='12,72 28,58 44,62 58,38 72,30 88,18' fill='none' stroke='%2334d399' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolygon points='12,72 28,58 44,62 58,38 72,30 88,18 88,85 12,85' fill='url(%23g)'/%3E%3Ccircle cx='88' cy='18' r='5' fill='%2334d399'/%3E%3C/svg%3E",sizes:'512x512',type:'image/svg+xml'}]};
 var mb=new Blob([JSON.stringify(mf)],{type:'application/json'});
 document.getElementById('pwa-manifest').href=URL.createObjectURL(mb);
 
-// iOS install hint
-var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-if(isIOS&&!window.navigator.standalone&&!localStorage.getItem('pwa_hint')){
+// iOS hint
+if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.navigator.standalone&&!localStorage.getItem('mm_hint')){
   setTimeout(function(){
     var b=document.createElement('div');
-    b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,.3)';
-    b.innerHTML='<div style="font-size:1.8rem">📲</div><div style="flex:1"><div style="font-weight:700;font-size:.9rem">加到主屏幕 / Add to Home Screen</div><div style="font-size:.75rem;opacity:.85;margin-top:2px">点 <strong>分享</strong> 按钮 → <strong>加入主屏幕</strong> ✨</div></div><button onclick="this.parentElement.remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.82rem;font-weight:600">OK</button>';
-    document.body.appendChild(b);
-    localStorage.setItem('pwa_hint','1');
-  },1500);
+    b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;padding:14px 18px;padding-bottom:max(14px,env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;gap:10px;box-shadow:0 -4px 20px rgba(0,0,0,.4)';
+    b.innerHTML='<div style="font-size:1.5rem">📲</div><div style="flex:1"><div style="font-weight:700;font-size:.85rem">加到主屏幕 / Add to Home Screen</div><div style="font-size:.7rem;opacity:.8;margin-top:1px">分享 → 加入主屏幕 ✨</div></div><button onclick="this.parentElement.remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:5px 11px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.78rem">OK</button>';
+    document.body.appendChild(b);localStorage.setItem('mm_hint','1');
+  },2000);
 }
 
 render();
